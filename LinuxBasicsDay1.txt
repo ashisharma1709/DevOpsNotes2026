@@ -1,0 +1,14 @@
+#OPERATING SYSTEM - It is a system software that manages computer hardware, software resources and provide common services for computer program.
+					It manages computer memory and processes,as well as of its hardware and software.
+					Uses: Process, memory, file, device management, and security and user control.
+					OS has worked in 3 parts: Application, Shell, Kernel
+					
+					USERS
+				      |
+					Application
+					  |
+					System Interface
+					  |
+					OPERATING SYSTEM (Windows, Ubuntu)
+					  |
+					Computer Hardcore( CPU, MEMORY, DISK)  
