@@ -1,0 +1,29 @@
+#GCP VM CREATION STEPS
+
+1. GCP Console login : 
+https://console.cloud.google.com/
+Note: Create free account with credit or debit card.
+
+Steps to create VM instance: https://console.cloud.google.com/compute/instances
+1. Go to Navigation Menu top left of GCP console-> Compute Engine -> VM Instances  -> Create Instances
+2. Under Machine Configurtions -> Enter VM Name(myfirstgcpvm) -> select region and zone (for demo purpose leave it as default value)
+3. Under OS and Storage -> Change OS if needed( OS(Ubuntu), Version(Ubuntu 22.04 LTS x86/64 noble, size 10 GB) -> click on select
+4. Under Networking -> Allow HTTP and HTTPS traffic 
+5. Click on Create button, our VM got created.
+
+6.(Optional) Instead of clicking on create button, create through CLI :
+Click on Equivalent code(top right) -> copy the command and click on Run in Cloud Shell -> Authorize -> Shell opened -> Command already there -> hit enter.
+ 
+NAME: myfirstgcpvm
+ZONE: us-central1-c
+MACHINE_TYPE: e2-medium
+PREEMPTIBLE: 
+INTERNAL_IP: 10.x.x.x
+EXTERNAL_IP: 34.x.x.x
+STATUS: RUNNING
+
+ VM created 
+
+
+
+After VM got created, connect it by clicking on SSH button, we can also connect it with windows powershell or putty by using key pair.
