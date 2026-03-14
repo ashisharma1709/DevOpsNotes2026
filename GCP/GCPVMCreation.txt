@@ -1,0 +1,33 @@
+#GCP Console login : https://accounts.google.com/v3/signin/accountchooser?continue=https%3A%2F%2Fconsole.cloud.google.com%2F&dsh=S1226696597%3A1773478476823592&followup=https%3A%2F%2Fconsole.cloud.google.com%2F&ifkv=ASfE1-pvV0qWc6yR7RDqcL6qwnQmH62fC3tDtlXGTLS8gkt3SQmzaONQhrSvO69uYmyTW0GMojYCqw&osid=1&passive=1209600&service=cloudconsole&flowName=GlifWebSignIn&flowEntry=ServiceLogin
+
+#create free account with credit or debit card
+
+#Login Successful : https://console.cloud.google.com/welcome/new?pli=1&project=project-300ceeec-9023-4093-9c8
+
+#Steps to create VM instance:
+
+1. Go to Navigation Menu top left of GCP console-> Compute Engine -> VM Instances  -> Create Instances
+
+2. Under Machine Configurtions -> Enter VM Name(myfirstgcpvm) -> select region and zone (for demo purpose leave it as default value)
+
+3. Under OS and Storage -> Change OS if needed( OS(Ubuntu), Version(Ubuntu 22.04 LTS x86/64 noble, size 10 GB) -> click on select
+
+4. Under Networking -> Allow HTTP and HTTPS traffic 
+
+5. Click on Create button, our VM got created.
+
+6.(Optional) Instead of clicking on create button, create through CLI :
+   
+   Click on Equivalent code(top right) -> copy the command and click on Run in Cloud Shell -> Authorize -> Shell opened -> Command already there -> hit enter.
+   
+NAME: myfirstgcpvm
+ZONE: us-central1-c
+MACHINE_TYPE: e2-medium
+PREEMPTIBLE: 
+INTERNAL_IP: 10.x.x.x
+EXTERNAL_IP: 34.x.x.x
+STATUS: RUNNING
+
+   VM created 
+
+After VM got created, connect it by clicking on SSH button, we can also connect it with windows powershell or putty by using key pair.
