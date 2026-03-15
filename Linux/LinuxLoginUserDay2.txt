@@ -4,32 +4,79 @@ Below are some important commands used for this purpose.
 1. whoami -> current login user
 
 EX: rblashish07@myfirstgcpvm:~$ whoami
-rblashish07  (This means the current logged-in user is rblashish07)
+    rblashish07  (This means the current logged-in user is rblashish07)
 
 2. id -> current user details ( user id, group id, user belong to which group, Useful for permission troubleshooting.)
 
 EX: rblashish07@myfirstgcpvm:~$ id
-uid=1002(rblashish07) gid=1003(rblashish07) groups=1003(rblashish07),4(adm),20(dialout),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),105(lxd),111(netdev),1000(ubuntu),1001(google-sudoers)
+	uid=1002(rblashish07) gid=1003(rblashish07) groups=1003(rblashish07),4(adm),20(dialout),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),105(lxd),111(netdev),1000(ubuntu),1001(google-sudoers)
 
 3. who  -> currenlty logged-in Users (who else logged-in to the server in current time, its username, terminal, time, IP address from where login happened)
 
 EX: rblashish07@myfirstgcpvm:~$ who
-rblashish07 pts/0        2026-03-14 09:38 (35.235.244.32)
+	rblashish07 pts/0        2026-03-14 09:38 (35.235.244.32)
 
 4.  w ->  ( User login + wo kya kaam kar raha hai, Shows logged-in users along with their activity.)
 
 EX: rblashish07@myfirstgcpvm:~$ w
-09:53:43 up 41 min,  1 user,  load average: 0.03, 0.02, 0.00
-USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT
-rblashis          35.235.244.32    09:38   40:51   0.00s  0.02s sshd: rblashish07 [priv]
+	09:53:43 up 41 min,  1 user,  load average: 0.03, 0.02, 0.00
+	USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT
+	rblashis          35.235.244.32    09:38   40:51   0.00s  0.02s sshd: rblashish07 [priv]
 
 5. last ->  Login History (kaun user, kab login hua, kaha se login hua)
 
 EX: rblashish07@myfirstgcpvm:~$ last
-rblashis pts/0        35.235.244.32    Sat Mar 14 09:38   still logged in
-reboot   system boot  6.17.0-1008-gcp  Sat Mar 14 09:11   still running
+	rblashis pts/0        35.235.244.32    Sat Mar 14 09:38   still logged in
+	reboot   system boot  6.17.0-1008-gcp  Sat Mar 14 09:11   still running
+	
+	wtmp begins Sat Mar 14 09:11:51 2026
 
-wtmp begins Sat Mar 14 09:11:51 2026
+6. users  -> Shows currently logged-in usernames only.
+
+EX: rblashish07@myfirstgcpvm:~$ users
+    rblashish07
+
+7. groups  -> Shows which groups the current user belongs to
+
+EX: rblashish07@myfirstgcpvm:~$ groups
+    rblashish07 adm dialout cdrom floppy audio dip video plugdev lxd netdev ubuntu google-sudoers
+
+
+8. How to identify real login users and its count ?  Inka home directory /home me hota hai, Inke paas login shell hota hai, Usually UID ≥ 1000
+
+   grep "/home" /etc/passwd
+   grep "/home" /etc/passwd | wc -last
+   
+EX: rblashish07@myfirstgcpvm:~$ grep "/home" /etc/passwd
+	ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+	rblas:x:1001:1002::/home/rblas:/bin/bash
+	rblashish07:x:1002:1003::/home/rblashish07:/bin/bash
+	rblashish07@myfirstgcpvm:~$ grep "/home" /etc/passwd | wc -l
+	3
+   
+9. How to identify login shell users ?  Ye users login shell(CLI) use kar sakte hain
+
+   grep "/bin/bash" /etc/passwd
+   grep "/bin/bash" /etc/passwd | wc -last
+   
+EX: rblashish07@myfirstgcpvm:~$ grep "/bin/bash" /etc/passwd
+	root:x:0:0:root:/root:/bin/bash
+	ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+	rblas:x:1001:1002::/home/rblas:/bin/bash
+	rblashish07:x:1002:1003::/home/rblashish07:/bin/bash
+	rblashish07@myfirstgcpvm:~$ grep "/bin/bash" /etc/passwd | wc -l
+	4   
+   
+10. Find users who cannot login. -> Services ko separate user account diya jata hai, Ye system/service users hain.
+
+   grep "nologin" /etc/passwd   
+   grep "nologin" /etc/passwd | wc -last
+
+11. How to find specific user.
+
+	grep "rblashish07" /etc/passwd
+  
+   
 
 
 Note : When we connect to a VM using SSH, the connection usually goes through an internet gateway or cloud proxy.

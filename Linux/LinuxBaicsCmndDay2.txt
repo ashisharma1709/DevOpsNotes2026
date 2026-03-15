@@ -1,0 +1,85 @@
+#BASIC LINUX COMMANDS
+
+
+1. hostname    									 ->  Display the hostname of the machine
+
+2. hostname -i 									 ->  Display the Internal/Private IP address of the machine
+
+3. curl ifconfig.me 							 ->  Display the Public IP/External IP of the machine
+
+4. uname 										 ->  display the OS type of the machine
+
+5. ls  									         ->  list directories and files
+
+6.  pwd 										 ->  Print working directory command in Linux
+
+7.  cd /home 									 ->  Linux command to navigate through directories
+
+8.  mkdir devops 								 ->  Command used to create directories in Linux
+
+9.  mv file1.txt file2.tv 						 ->  Move and rename files in Linux
+
+10. cp file1.txt file2.txt 						 ->  create duplicate copy of the files 
+
+11. rm file1.txt or rm -r dir1 					 ->  Delete files or directories
+
+12. touch test.txt 								 ->  Create blank/empty files
+
+13. echo hello 									 ->  Print any text that follows the command
+
+14. echo Hello > file.txt  						 ->  create and write the content in the file , if file exists overwrite the content 
+
+15. less syslog        							 ->  can move in both up and down direction( space for next page, enter for next line, b for previous page,up down arrow, q to quit)
+
+16. man ls										 ->  Access manual pages for all Linux commands
+
+17. head -n 5 abc 								 ->  Return the specified number of lines from the top
+
+18. tail -n 5 abc  								 ->  return the specified number of lines from the bottom
+
+19. tail -100f syslog 							 ->  100 lines of live logs 
+
+20. ps 											 ->	 Display list of running or active processes
+
+21. wget https://get.docker.com 				 ->  Docker install script download
+
+22. top     									 ->  View active processes live with their system usage(CPU, Memory)
+
+23. cat file.txt 								 ->  Display the file content
+
+24. more file.txt 								 ->  if the file is bigger mostly forward ja sakte pagewise( space for next page, enter for next line, b for previous page, q to quit)
+
+25. cat /etc/os-release							 ->  to get the version of the machine
+
+26. ifconfig            						 ->  ip address of machine
+
+27. grep -i error logfile.log    				 ->  search error case sensitive inside logfile.log or entire system
+
+28. grep -n error logfile.log              		 ->  search word along with the line number
+
+29. tail -f syslog | grep error                  ->  live logs dekho aur sirf error filter karo
+
+30. awk '{print $1}' syslog | head -5  			 ->  to fetch the data column wise. 
+
+31. awk -F: '{print $1}' /etc/passwd  			 ->  username of system (-F:  → colon separator, $1   → first column)
+
+32. find /home -name ashish.txt  				 ->  to search files in the system(it search file ashish.txt file in /home directory)
+
+33. find /var/log -name "*.log"                  ->  find all log files in /var/log directory
+
+34. find /home -type f           				 ->  it will search only files
+
+35. find /home -type d           				 ->  it will find all directories inside /home
+
+36. find / -name app.log         				 ->  find application log
+
+37. wget -b https://speed.hetzner.de/100MB.bin   ->  if file size is large, download in background
+
+38. tail -f wget-log                             ->  progress check of download 
+
+39. wget -c https://speed.hetzner.de/100MB.bin   ->  if internet break or download stop, run this to continue download
+
+40. wget https://get.docker.com -O install-docker.sh ->  Docker install script download
+
+
+
