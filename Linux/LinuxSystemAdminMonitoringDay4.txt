@@ -1,0 +1,45 @@
+#SYSTEM ADMIN/MONITORING LINUX COMMAND
+
+
+1. uname -a        					   -> shows kernel name, kernel release, kernel version
+
+2. sudo apt update                     -> Run a command as a root user
+
+3. top 								   -> Display processor activity of system
+
+3. uptime 							   -> Show how long system is running
+
+4. free 							   -> Show memory status
+
+5. last 							   -> Display user's activity in the system
+
+6. ps 								   -> Display about processes running on the system
+
+7. df/df -h (mb)					   -> Display filesystem information
+
+8. du  							       -> Display usage
+
+9. ping google.com  				   -> Check connection by sending packet test packet
+
+10. locate *.txt                       -> locate or find files matching to pattern
+
+11. mkdir myfiles                      -> create directory
+
+12. touch myfiles/{a.txt,b.txt,c.txt}  ->  create multiple empty files at once inside directory
+
+12. tar -cvf allfiles.tar myfiles      ->   Zip/tar all files
+
+13. tar -xvf allfiles.tar              ->   Untar operation
+
+14. jorunalctl  					   -> 	system logs check
+
+15. journalctl -n 50				   -> 	last logs 
+
+16. journalctl -f 					   ->   live logs
+
+17. journalctl -b					   ->   boot logs
+
+18. journalctl -u ssh  				   ->  service logs
+
+
+
