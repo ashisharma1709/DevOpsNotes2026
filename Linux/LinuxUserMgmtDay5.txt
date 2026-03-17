@@ -1,0 +1,29 @@
+# USER RELATED LINUX OPERATIONS
+
+1. sudo useradd ashish   -> create new user with default shell /bin/sh sudo and add it in /etc/passwd but with no home directory
+
+2. sudo useradd -m ashish  -> create user with /home directory
+
+3. sudo useradd -m -d /data/shubham shubham  -> specific home directory
+
+4. sudo useradd -m -s /bin/bash shubham   -> default shell change
+
+5. sudo useradd -g developers shubham     -> add user to specific group developers
+
+6. sudo passwd shubham     -> after user create, passwd need to set
+
+7. su - shubham     -> switch user
+
+8. sudo usermod -aG sudo shubham   -> usermod to modify user, here user added to another group
+
+9. sudo userdel shubham      -> delete the user if no longer needed
+
+10. sudo userdel -r shubham   -> if want to delete the home directory as well
+
+11. delgroup devops   -> it will delete the group 
+
+12. deluser ashish   -> delete the user in interactive mode
+
+13. getent group   -> list all the groups of the system
+
+14. vi /etc/sudoers  -> give or add user for sudo permission eg. root all all all 
