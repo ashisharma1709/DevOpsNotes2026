@@ -1,0 +1,45 @@
+1. ifconfig        					 -> Display and manipulate route and network interfaces.
+
+2. ping google.com 					 -> To check connectivity between two nodes.
+
+3. netstat 							 -> Display connection information.
+
+4. netstat -tulnp 					 ->tcp,udp listening ports,numeric,  process 
+
+5. ss 						  		 -> It is a replacement of netstat.
+
+6. dig google.com 					 -> Query DNS related information.
+
+7. nslookup google.com 				 -> Find DNS related query, simple version of dig
+
+8. route -n 						 -> Shows and manipulate IP routing table
+
+9. ip route   						 -> modern version of route
+
+10. hostname 						 -> To identify a network name.
+
+11. hostnamectl set-hostname name 	 -> change the hostname
+
+12. wget <url_file>					 -> To download a file from internet.
+
+13. curl -X GET api-url				 -> data transefer ,api testing, Http request
+
+14. curl -I https://google.com       -> response 200 means OK, 404,502 means issue
+
+15. mtr goolge.com 					 -> network troubleshooting, ping + traceroute combo
+
+16. whois goolge.com 				 -> website, domain info, owner details, domain expiry
+
+17. ifplugstatus					 -> Tells whether a cable is plugged(linkdetected) in or not(unplugged)
+
+18. traceroute goolge.com    		 -> checks path, data ka route
+
+19. ip a 							 -> ip address
+
+20. ip r 							 -> routing 
+
+21. ip link  						 -> interface
+
+22. nc -zv goolge.com 80 			 -> port testing tool
+
+
