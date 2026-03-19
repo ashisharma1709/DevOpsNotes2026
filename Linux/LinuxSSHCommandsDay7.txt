@@ -1,0 +1,62 @@
+1. systemctl status ssh  								-> to check ssh service is running or not 
+
+2. systemctl start ssh   								-> start ssh service 
+
+3. systemctl restart ssh  								-> restart ssh service
+
+4. sudo ss -tulnp | grep ssh   							-> Confirms SSH is running on port 22 (or custom port)
+
+
+5. ssh-keygen   										-> generate public and private key pair (it will ask for path,password, filename then .pub is public key).Copy public key and paste it onto server user/.ssh/authorized_keys and private key we can use to login onto that server
+
+6. ssh usernaem@ip -> but this will ask password
+
+7. ssh -i private_key username@ip                       -> login to server using private key
+
+   To disable password login, edit /etc/ssh/sshd_config and change PasswordAuthentication Yes to No, then restart ssh using systemctl restart ssh
+
+8. ssh -p 23 username@host    							-> connect to host as a user using a particular port 
+
+9. ssh 10.22.2.22 									    -> connect to host via SSH default port 22
+
+10. ssh-copy-id usernameoftargetserver@iptargetserver   -> automatically copies public key from one server to another server,
+														👉 First time:Password maangega (target VM ka),Uske baad key copy ho jayegi
+
+
+Note: 👉 Important files:
+
+~/.ssh/id_rsa (private key)
+
+~/.ssh/authorized_keys (server side key)
+
+/etc/ssh/sshd_config (main config)
+
+/var/log/auth.log (troubleshooting)
+
+/var/log/auth.log  (to check logs)
+
+~/.ssh/config (Optional but powerful) -> touch ~/.ssh/config, chmod 600 ~/.ssh/config, vi ~/.ssh/config 
+     Host myserver
+    HostName 192.168.1.10
+    User ubuntu
+    IdentityFile ~/.ssh/id_rsa
+
+Normally,we do : ssh ubuntu@192.168.1.10
+but afterr adding details in config -> ssh myserver
+
+Host prod
+    HostName 10.0.0.1 (target server ip)
+    User ec2-user    (targe server username)
+    IdentityFile ~/.ssh/prod_key.pem
+
+Host dev
+    HostName 10.0.0.2
+    User ubuntu
+    IdentityFile ~/.ssh/dev_key.pem
+	
+ssh prod
+ssh dev
+	
+	
+
+
