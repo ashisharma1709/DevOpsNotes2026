@@ -1,0 +1,31 @@
+VI EDITOR:  Popular and classic text editor in Linux. It works in command and insert mode.
+
+1. i    	 -> enter i to insert anything in file
+
+2. esc  	 -> enter esc to terminate insert mode and came to command mode
+
+3. u    	 -> undo last changes
+
+4. dd   	 -> delete the entire line
+
+5. 3dd       -> delete the 3 lines
+
+6. /  		 -> to serach any pattern in file
+
+7. k  		 -> move cursor up
+
+8. j 		 -> move cursor down
+
+9. h  		 -> move cursor left 
+
+10. l 		 -> move cursor right
+
+11. :se nu   -> to populate the line numbers in file
+
+12. :w   	 -> save file but keep it open
+
+13. :q   	 -> quit without saving
+
+14. :wq   	 -> save the file and quit
+
+15. :wq!   	 -> forcefully save the file 
