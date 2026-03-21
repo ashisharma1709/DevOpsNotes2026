@@ -1,0 +1,88 @@
+
+🔐 Linux File Permission Basics 
+
+Linux me har file ke 3 types ke users hote hain:
+
+u (user) → file ka owner
+g (group) → group ke log
+o (others) → baaki sab
+
+Aur 3 permissions hoti hain:
+
+r (read) → file dekh sakte ho
+w (write) → edit kar sakte ho
+x (execute) → run kar sakte ho
+
+E.g.
+-rwxr-xr--  
+user → rwx (full access)
+group → r-x (read + execute)
+others → r-- (sirf read)
+
+
+chmod -> permission change karne ke liye
+
+Syntax: chmod [who][+/-][permission] filename
+
+1. User ko execute permission dena
+     chmod u+x file.sh   
+	 👉 Owner ab file run kar sakta hai
+
+2. Group se write permission hatao
+     chmod g-w file.txt
+
+3. Sabko read permission do
+	 chmod a+r file.txt
+
+👉 a = all (user + group + others)
+
+4. Multiple change ek saath
+	 chmod u+rwx,g+rx,o-r file.txt
+	 
+	 
+****************************** Numeric permission ******************************************
+
+👉 Add karke use karte hain:
+
+Value	Meaning
+7	rwx (4+2+1)
+6	rw- (4+2)
+5	r-x (4+1)
+4	r--	 
+
+
+🔹 Example:
+chmod 755 file.sh
+
+👉 Meaning:
+
+user → 7 → rwx
+group → 5 → r-x
+others → 5 → r-x
+🔹 Example 2:
+chmod 600 secret.txt
+
+👉 Only owner read + write
+👉 baaki sab blocked 🚫
+
+
+
+*****************************chown***************************************************************
+
+👑 3. chown command (owner change karne ke liye)
+
+👉 Syntax:
+chown user:group filename
+
+🔹 Examples:
+1. Owner change karo
+chown suraj file.txt
+
+2. Owner + group change
+chown suraj:devops file.txt
+
+3. Sirf group change
+chown :devops file.txt
+
+4. Folder ke andar sab change (recursive 🔥)
+chown -R suraj:devops /project
