@@ -1,0 +1,25 @@
+*********************LINUX PROCESSES*************************
+
+👉 Process -> A running instance of program is a process. Ex: java program, nginx server, ssh connection, etc.
+
+👉 PID   ->  Every process running in Linux has a unique number called Process ID (PID).
+
+	ps -ef -> above command is used to identify the running processes.
+	
+	ps = process status dekhne ke liye.
+	e  = every process of the system.
+	f  = full format.
+	
+👉 Zombie Process -> 	One parent process creates child process, child process complete its work, but parent process does not read result of child. 
+						then child process became zombie process. (means process die, but its entry is still remain in the system)
+						
+
+	👉Identify zombie process -> ps aux   => if STAT=Z, it means process is zombie.
+
+					a = all users' process
+					u = detailed format
+					x = background process
+
+	👉 Kill Zombie process: 
+
+
