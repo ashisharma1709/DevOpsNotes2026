@@ -11,15 +11,89 @@
 	f  = full format.
 	
 👉 Zombie Process -> 	One parent process creates child process, child process complete its work, but parent process does not read result of child. 
-						then child process became zombie process. (means process die, but its entry is still remain in the system)
+						then child process became zombie process. (means process die, but its entry is still remain in the system).
+						A Zombie Process is a process that has finished execution but still has an entry in the process table.
 						
 
-	👉Identify zombie process -> ps aux   => if STAT=Z, it means process is zombie.
+	👉Identify zombie process -> ps aux or ps -el  , where a = all users' process, u = detailed format, x = background process
+	
+					Best command: ps aux | grep Z  or ps -ef | grep defunct
 
-					a = all users' process
-					u = detailed format
-					x = background process
+					if STAT=Z, it means process is zombie.
+					
+					PID   PPID  STAT  CMD
+					3456  2345   Z    defunct
 
-	👉 Kill Zombie process: 
+									
+
+	👉 Kill Zombie process: We cannot directly kill the zombie process as it is already a dead process, so need to kill parent process.
+	
+	👉 How to Remove Zombie Process:
+	
+	Step 1: Find Parent ID: ps -el | grep Z
+	
+	F S UID  PID  PPID CMD
+	0 Z 1001 3456 2345 defunct
+	
+	ParentPID = 2345
+	Zombie ProcessID = 3456
+	
+	Step 2: Kill Parent process
+	
+	kill -9 2345  or kill -15 PID
+	
+	Part		       Meaning
+    kill			Send signal to process
+	-9				Force kill signal (SIGKILL)
+	2345			Parent process ID
+	
+	
+	
+	Example:
+
+	1–2 zombie process → no issue
+	1000+ zombie process → problem
+
+	Kyuki:
+
+	Process table fill ho sakta hai
+	Naye processes create nahi ho paate
+	System slow ho sakta hai
+	
+
+👉 kill Command -> Linux me kill command process ko signal bhejne ke liye use hota hai.
+
+   👉kill 1234  -> it sends system default signal SIGTERM(15), 
+   
+       Process ko gracefully stop hone ka request. Process ko chance milta hai:files save karne ka, connections close karne ka, cleanup karne ka	
+   
+   👉 kill -15 1234  -> It is also SIGTERM, meaning graceful shutdown.
+   
+   
+   👉 kill -9 1234   -> It is SIGKILL signal.
+   
+       Forcefully process ko immediately terminate kar deta hai. System directly process ko hata deta hai, cleanup ka chance nahi, file save ka chance nahi.
+	   
+	   kill -9 $(pidof java)  -> kill all the running java process
+	   
+	   
+	   
+	   
+👉 Daemon Process -> Background me chalne wala process. Ye system service provide karta hai.User directly interact nahi karta.
+					 A daemon process is a background process that runs continuously and provides system services such as SSH, web server, or scheduler.
+					 Example: Jab system start hota hai,Kuch services automatically start ho jati hain:
+
+									SSH service
+									HTTP server
+									database service
+
+							  Ye sab daemon processes hain.	   
+	 
+	 
+	How to identify Daemon process ?
+	 Usually daemon processes:
+	 Background me run karte hain
+	 Terminal se connected nahi hote
+	 PPID = 1 hota hai (system process)			
 
 
