@@ -96,4 +96,12 @@
 	 Terminal se connected nahi hote
 	 PPID = 1 hota hai (system process)			
 
+    Command: ps -ef
+
+	Example:
+	root 1000 1 sshd
+
+	Yaha:
+	PPID = 1
+	matlab init/systemd ne start kiya
 
