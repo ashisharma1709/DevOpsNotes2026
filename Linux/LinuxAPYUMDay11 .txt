@@ -1,0 +1,26 @@
+******************************* APT and YUM **************************
+
+👉  Both are package manager in Linux used to install, remove and update software packages which are downloaded from software repositories.
+
+
+1. APT( Advanced Package Tool):- Used with Ubuntu / Debian family distributions and handles deb software packages. Ex: Ubuntu, Kali Linux.
+								 Simple term : It is app store for Ubuntu.
+								 DEB = software ke installation file formats like .exe in windows
+								 
+								 
+	👉 Install Packages:  apt install nginx  -> meaning nginx install karo 
+	
+	👉 Remove Packages:  apt remove nginx  -> meaning nginx uninstall karo  apt update
+	
+	👉 Update Packages:  apt update   -> APT me “update” list refresh karta hai
+	
+	👉 Upgrade Packages:  apt upgrade  -> Sab installed packages ko latest version me le jaata hai  
+	
+	👉 Search Packages:   apt search nginx  
+	
+	👉 Package info :     apt show nginx
+	
+	👉 Installed Packge list:  apt list --installed
+	
+  
+
