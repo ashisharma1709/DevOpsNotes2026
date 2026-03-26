@@ -12,9 +12,12 @@
 	
 	👉 Remove Packages:  apt remove nginx  -> meaning nginx uninstall karo  apt update
 	
-	👉 Update Packages:  apt update   -> APT me “update” list refresh karta hai
+	👉 Update Packages:  apt update   -> APT me “update” list refresh karta hai, package list refresh
+						 apt-get update -> stable for scripts in automation
 	
-	👉 Upgrade Packages:  apt upgrade  -> Sab installed packages ko latest version me le jaata hai  
+	👉 Upgrade Packages:  apt upgrade  -> Sab installed packages ko latest version me le jaata hai, Installed packages update karte hain
+						  apt-get upgrade -> same funtionlity but best for script, Installed packages update karte hain
+						  apt-get dist-upgrade  -> New dependencies install karta hai, Old remove bhi kar sakta hai
 	
 	👉 Search Packages:   apt search nginx  
 	
@@ -22,5 +25,99 @@
 	
 	👉 Installed Packge list:  apt list --installed
 	
-  
+2. YUM (Yellowdog Updater Modified) : Used with RHEL / CentOS based systems. EX: CentOS, Red Hat.
+									  It is a package manager for RedHat family.
+									  rpm: file formats for RedHat.
+									  
+	👉 Install Packages:  yum install nginx  -> meaning nginx install karo 
+	
+	👉 Remove Packages:  yum remove nginx  -> meaning nginx uninstall karo  apt update
+	
+	👉 Update Packages:  yum check-update   -> YUM me “check-update” list check karta hai
+	
+	👉 Upgrade Packages:  yum update  -> Sab installed packages ko latest version me le jaata hai  
+	
+	👉 Search Packages:   yum search nginx  
+	
+	👉 Package info :     yum show nginx
+	
+	👉 Installed Packge list:  yum list installed	
 
+
+
+3. DEB: .deb file is an offline installer of Ubuntu. Used in Ubuntu / Debian systems. 
+
+		Example file:
+
+		nginx.deb
+
+		👉 Install kaise karte hain:
+
+		dpkg -i nginx.deb
+
+
+4. RPM : .rpm file is an offline installer of RedHat. Used in RHEL / CentOS systems
+
+		Example:
+
+		nginx.rpm
+
+		👉 Install command:
+
+		rpm -ivh nginx.rpm
+		
+Note: APT/YUM are a package manager which install and manage software, while .deb/.rpm are package file, they are Actual software file.
+      APT used .deb file, while YUM uses .rpm file.
+
+
+🔹5. Real DevOps Scenario 🧠
+	
+	Scenario 1: Internet available
+	
+	apt install nginx
+
+	👉 Automatically .deb download + install
+
+	Scenario 2: No internet (offline install)
+	
+	dpkg -i nginx.deb
+
+	👉 Direct file se install	
+
+
+
+🔹 6. Important Commands 🔥
+
+📦 DEB related
+dpkg -i file.deb     # install
+dpkg -r package      # remove
+dpkg -l              # list installed
+
+📦 RPM related
+rpm -ivh file.rpm    # install
+rpm -e package       # remove
+rpm -qa              # list installed
+
+
+
+🔥 7. /etc/apt/sources.list  -> It defines System packages kahaan se download karega.
+
+🔥 6. /etc/yum.conf     -> It is main configurtation file of yum.
+
+
+🔥 9. Real Scenario Answer (Interview Ready)
+
+👉 Question:
+“apt install not working, what will you do?”
+
+✅ Perfect Answer:
+
+“First I’ll check repository configuration in /etc/apt/sources.list, then refresh metadata using apt update, verify package availability, check network connectivity, and if needed manually download using wget and install via dpkg.”
+
+apt update
+apt search nginx
+cat /etc/apt/sources.list
+sudo apt install nginx
+
+wget http://example.com/package.deb    -> wget is used to download packages, installation is done via dpkg or apt
+dpkg -i package.deb
