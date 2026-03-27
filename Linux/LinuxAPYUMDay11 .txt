@@ -83,17 +83,21 @@ Note: APT/YUM are a package manager which install and manage software, while .de
 	dpkg -i nginx.deb
 
 	👉 Direct file se install	
+	
+	Same for RPM:
+	
+	rpm -ivh nginx.rpm
 
 
 
 🔹 6. Important Commands 🔥
 
 📦 DEB related
-dpkg -i file.deb     # install
+dpkg -i file.deb     # install  (Debian Package Manager-> .deb file install/remove/manage)
 dpkg -r package      # remove
 dpkg -l              # list installed
 
-📦 RPM related
+📦 RPM related        (RPM = Red Hat Package Manager, low-level tool for .rpm files)
 rpm -ivh file.rpm    # install
 rpm -e package       # remove
 rpm -qa              # list installed
@@ -121,3 +125,88 @@ sudo apt install nginx
 
 wget http://example.com/package.deb    -> wget is used to download packages, installation is done via dpkg or apt
 dpkg -i package.deb
+
+
+
+❓ 10: “Server me internet nahi hai — software kaise install karoge?”
+✅ Answer:
+
+👉 Offline install:
+
+	Ubuntu:
+	dpkg -i package.deb    #i means install, r means remove 
+	
+	CentOS:
+	rpm -ivh package.rpm   #ivh i install, v verbose, h progress bar
+
+
+
+
+🔥 11. Kab kya use kare? (REAL DEVOPS ANSWER)
+	✅ 1. apt kab use kare?
+
+	👉 Jab:
+
+	Internet available ho
+	Normal install karna ho
+	apt install nginx
+
+	✔ Best choice 👍
+
+	✅ 2. yum / dnf kab use kare?
+
+	👉 Same as apt but for RedHat
+
+	yum install nginx
+	
+	✅ 3. dpkg kab use kare?
+
+	👉 Jab:
+
+	.deb file already hai
+	Offline install karna hai
+	
+	dpkg -i nginx.deb
+
+	⚠️ Problem:
+
+	Dependency fail ho sakti hai
+	
+	✅ 4. rpm kab use kare?
+
+	👉 Jab:
+
+	.rpm file manually install karni ho
+	rpm -ivh nginx.rpm
+	
+	
+👉
+	wget = file laane ke liye
+	dpkg = file install karne ke liye
+
+	🔥 Final Simple Flow 😎
+	(OPTIONAL)
+	wget / scp / copy  →  .deb file mil gayi
+
+	(FINAL STEP)
+	dpkg -i file.deb	
+	
+	
+👉 Server pe internet nahi hai
+
+	Isliye:
+
+	❌ Ye nahi chalega:
+
+	apt install nginx
+	✔ Solution:
+	Apne laptop pe download karo:
+	wget nginx.deb
+	Server pe bhejo:
+	scp nginx.deb server:/tmp
+	Server pe install:
+	dpkg -i nginx.deb
+
+	👉 Ab clear:
+
+	“Offline install = server internet ke bina install”	
