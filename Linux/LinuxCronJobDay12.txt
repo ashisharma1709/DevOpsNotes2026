@@ -1,0 +1,23 @@
+**********  CRON **************
+Cron is a job scheduling utility present in Unix like systems.
+It reads the crontab for running predefined scripts. By using a specific syntax, we can configure a cron job to schedule scripts or other commands to run automatically.
+
+
+👉 Crons vs Crontab vs Cronjob
+
+👉 Cron is a daemon that runs at the times of system boot.
+
+👉 Crontab is a file that contains the schedule of cron entries to be run and at specifc times. File location varies by OS.
+
+👉 Cronjob or cron schedule is a specific set of executionof instructions specfiying day, time and command by execute.
+
+* * * * * /path to file/script.sh
+* * * * * /path to file/script.sh >> /tmp/test.txt
+
+Crontab commands :
+
+crontab -e : edit crotab file, or create one if doesn't already exists.
+crontab -l : list of cronjobs, display crontab file contents.
+crontab -r : remove crotab file
+crontab -v : Display the last time we edited our crontab file.(this option available only in few systems)
+
