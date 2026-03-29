@@ -21,3 +21,47 @@ crontab -l : list of cronjobs, display crontab file contents.
 crontab -r : remove crotab file
 crontab -v : Display the last time we edited our crontab file.(this option available only in few systems)
 
+
+
+****************  In More Simple term *****************************
+
+👉 Cron = background service (daemon)
+		  Linux ka scheduler hai
+		  Automatically tasks run karwata hai specific time pe
+
+		📌 Example:
+
+			Roz 2 baje backup lena
+			Har 5 min logs check karna
+			Sunday ko server restart
+
+
+👉 Crontab = configuration file
+
+			Isme hum schedule likhte hain
+			Kaunsa command kab chalega
+
+			Command:
+
+			crontab -e
+
+			👉 Ye open karega ek file jahan hum schedule likhoge
+
+
+👉 Cronjob = actual task
+
+			📌 Example:
+
+			* * * * * echo "Hello DevOps"
+
+			👉 Ye ek cronjob hai
+
+
+🧩 Structure :
+* * * * * command
+| | | | |
+| | | | └── Day of week (0-7) (Sunday = 0/7)
+| | | └──── Month (1-12)
+| | └────── Day of month (1-31)
+| └──────── Hour (0-23)
+└────────── Minute (0-59)
