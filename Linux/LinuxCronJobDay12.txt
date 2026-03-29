@@ -65,3 +65,37 @@ crontab -v : Display the last time we edited our crontab file.(this option avail
 | | └────── Day of month (1-31)
 | └──────── Hour (0-23)
 └────────── Minute (0-59)
+
+
+*******************  Examples of cronjob  *****************************
+
+✅ Har minute run kare   -> * * * * * command
+
+
+✅ Har 5 min  -> */5 * * * * command
+
+
+✅ Roz 2:30 AM  -> 30 02 * * * command
+
+✅ Har Sunday   -> 0 0 * * 0  command
+
+✅ Har month 1st date  -> 0 0 1 * * command
+
+
+**************************  Real Use cases ***************************
+
+💻 Real DevOps Use Cases
+
+🔥 1. Log cleanup
+0 0 * * * rm -rf /var/log/*.log
+
+🔥 2. Backup script
+0 1 * * * /home/ubuntu/backup.sh
+
+🔥 3. Server health check (every 5 min)
+*/5 * * * * curl -I google.com
+
+🔥 4. Disk usage alert
+*/10 * * * * df -h > /tmp/disk.txt
+
+
