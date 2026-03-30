@@ -20,6 +20,7 @@ crontab -e : edit crotab file, or create one if doesn't already exists.
 crontab -l : list of cronjobs, display crontab file contents.
 crontab -r : remove crotab file
 crontab -v : Display the last time we edited our crontab file.(this option available only in few systems)
+systemctl status cron -> Cron service status check
 
 
 
@@ -95,7 +96,90 @@ crontab -v : Display the last time we edited our crontab file.(this option avail
 🔥 3. Server health check (every 5 min)
 */5 * * * * curl -I google.com
 
-🔥 4. Disk usage alert
+🔥 4. Disk usage alert 
 */10 * * * * df -h > /tmp/disk.txt
+
+
+
+********   Cron Parameters *********************
+
+🧠 Step 1: Cron is like time clock
+
+	Cron ka format hota hai:
+
+	Minute  Hour  Date  Month  Day
+
+	👉 Total 5 boxes hote hain
+
+	📦 Box 
+	[ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]
+	  M     H     D     M     W
+	Box	Meaning
+	1	Minute
+	2	Hour
+	3	Date (month ka din)
+	4	Month
+	5	Week day
+
+
+	🔥 Rule :
+
+	👉 * = "har value"
+	👉 */5 = "har 5 step"
+	👉 0 = exact value
+
+
+
+❌ Example 1:
+	*/5 * * * * command
+
+	👉 Isko break karte hain:
+
+	Box	   Value	Meaning
+	Minute	*/5		har 5 min
+	Hour	*		har hour
+	Date	*		har din
+	Month	*		har month
+	Day		*		har weekday
+	
+	✅ Final Meaning:
+
+	👉 Har 5 minute mein command chalega
+
+	🕐 Example:
+
+	12:00
+	12:05
+	12:10
+	12:15
+
+
+❌ Example 2:
+	0 0 * * 0 command   
+
+	Break karte hain:
+
+	Box		Value	Meaning
+	Minute	0		minute 0   exact start of hour
+	Hour	0		hour 0   12 AM (midnight)
+	Date	*		har din
+	Month	*		har month
+	Day		0		Sunday
+	
+	✅ Final Meaning:
+
+	👉 Har Sunday raat 12 baje (midnight)
+
+	🕐 Example:
+
+	Sunday 00:00
+	
+💥 Shortcut Trick : Minute → Hour → Date → Month → Day	
+
+
+*/10 9-17 * * 1-5    -> 9 to 5 har 10 minute pe monday to friday chalega
+
+0 0 1 * * backup.sh   -> Monthly backup job  
+
 
 
