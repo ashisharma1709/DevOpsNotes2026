@@ -1,0 +1,64 @@
+***************** ADVANCED CRONE ***********************
+
+
+🚀 1. Logging in Cron (MOST IMPORTANT)
+❌ Problem:
+
+	Cron chal raha hai ya nahi → pata hi nahi 😓
+
+	✅ Solution: Output ko file mein store karo
+	* * * * * /home/ubuntu/script.sh >> /home/ubuntu/output.log 2>&1
+
+	>> → output append karega
+	2>&1 → error bhi same file mein daal dega
+
+	👉 Matlab:
+
+	Success + Error dono ek hi file mein
+
+
+🚀 2. Cron Job ka full path (VERY COMMON MISTAKE)
+
+	❌ Galat:
+	* * * * * backup.sh
+	✅ Sahi:
+	* * * * * /home/ubuntu/backup.sh
+
+	👉 Cron ko shortcut ya relative path samajh nahi aata
+
+
+🚀 3. Environment Variables Issue
+❌ Problem:
+
+		Script manual chalti hai
+		Cron se nahi chalti 😡
+
+		👉 Kyun?
+
+		Cron ka environment alag hota hai
+
+		✅ Fix:
+		Option 1: PATH define karo
+		PATH=/usr/bin:/bin
+		* * * * * /home/ubuntu/script.sh
+
+		Option 2: Script mein hi define karo
+		export JAVA_HOME=/usr/lib/jvm/java-8
+
+🚀 4. Multiple Commands ek cron mein
+* * * * * command1 && command2
+
+	👉 && = agar pehla success hua tabhi next chalega
+
+	Alternative:
+	* * * * * command1 ; command2
+
+	👉 ; = dono chalenge chahe error aaye ya nahi
+
+
+
+🚀 5. Cron Job Disable kaise kare
+
+👉 Direct delete nahi karna? Comment kar do:
+
+# * * * * * /home/ubuntu/script.sh
