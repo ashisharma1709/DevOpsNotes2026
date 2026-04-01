@@ -62,3 +62,49 @@
 👉 Direct delete nahi karna? Comment kar do:
 
 # * * * * * /home/ubuntu/script.sh
+
+
+
+
+🚀 6. Cron Logs check 
+	Ubuntu/Debian:
+	grep CRON /var/log/syslog
+	
+	RHEL/CentOS:
+	grep CRON /var/log/cron
+	
+🚀 7. Special Keywords (Shortcut 🔥)
+	@reboot    → system start hote hi
+	@daily     → daily
+	@hourly    → har hour
+	@weekly    → weekly
+	@monthly   → monthly
+
+	Example:
+	@reboot /home/ubuntu/start.sh
+
+	👉 Server start hote hi script chalega	
+	
+	
+🚀 8. Kya install karna padta hai?
+✅ Mostly:
+
+👉 Already installed hota hai Linux mein
+
+🔍 Check karo:
+	cron --version or systemctl status cron
+	❌ Agar nahi hai (rare case):
+	
+	Ubuntu/Debian:
+	sudo apt install cron
+	
+	RHEL/CentOS:
+	sudo yum install cronie
+	
+	▶️ Start service:
+	sudo systemctl start cron
+	sudo systemctl enable cron	
+	
+	
+	
+	
