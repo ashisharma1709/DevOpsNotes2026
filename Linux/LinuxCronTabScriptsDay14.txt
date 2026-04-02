@@ -1,0 +1,41 @@
+*************** Crontab with Scripts ****************
+
+💻 1. Script ke saath kaise use kare :
+	
+	🔥 Step 1: Script banao
+	nano backup.sh
+	#!/bin/bash
+	echo "Backup started"
+	date >> /home/ubuntu/backup.log
+	
+	🔥 Step 2: Permission do
+	chmod +x backup.sh
+	
+	🔥 Step 3: Cron mein add karo
+	crontab -e
+
+	Add:
+	0 2 * * * /home/ubuntu/backup.sh >> /home/ubuntu/output.log 2>&1
+	
+	🎯 Result:
+
+	👉 Roz 2 baje script chalegi
+	👉 Output + error log file mein save hoga
+	
+	
+
+🚀 2. Script kahaan use hoti hai?
+
+	🔥 Real DevOps Use Cases:
+	✅ Backup automation
+	0 1 * * * backup.sh
+	✅ Log cleanup
+	0 0 * * * cleanup.sh
+	✅ Health check
+	*/5 * * * * health.sh
+	✅ DB dump
+	0 3 * * * db_backup.sh	
+	
+Script likha → permission diya → crontab -e → schedule likha → cron run karega automatically	
+
+
