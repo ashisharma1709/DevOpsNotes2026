@@ -38,4 +38,18 @@
 	
 Script likha → permission diya → crontab -e → schedule likha → cron run karega automatically	
 
+❓ 2>&1 kya hai?
 
+👉 Error output ko normal output ke saath merge karta hai
+
+❓ @reboot ka use?
+
+👉 Server start hote hi job run karne ke liye
+
+
+
+👉 Always likho:
+
+* * * * * /path/script.sh >> /path/log.log 2>&1
+
+👉 Ye hi production standard hai 💯
