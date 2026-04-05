@@ -19,8 +19,18 @@ Crontab commands :
 crontab -e : edit crotab file, or create one if doesn't already exists.
 crontab -l : list of cronjobs, display crontab file contents.
 crontab -r : remove crotab file
+crontab -i -r : Safe version, delete se pehle confirm karega
 crontab -v : Display the last time we edited our crontab file.(this option available only in few systems)
+crontab -u username -e:  Kisi dusre user ka cron edit karne ke liye (root use karta hai)
+e.g. crontab -u ubuntu -l : ubuntu user ke cron jobs dikhenge
 systemctl status cron -> Cron service status check
+sudo systemctl enable cron:  Server restart ke baad bhi cron chalega, Enable Cron (Auto start after reboot)
+▶️ Start: sudo systemctl start cron
+⏹️ Stop: sudo systemctl stop cron
+🔁 Restart: sudo systemctl restart cron
+
+
+
 
 
 
