@@ -1,0 +1,102 @@
+******************** SAMPLE SCRIPT FOR CRON ******************
+
+🖥️ Scenario: Suppose we login to one server and we are at its home directory. Now create one script and add to cron job at same path that print some output every 5 minute.
+
+
+🚀 Step 1: Decide kya automate karna : we want har 5 min mein ek script chale
+
+📝 Step 2: Script create kar
+	nano /home/ubuntu/test.sh
+
+	#!/bin/bash
+	echo "Cron chal raha hai" >> /home/ubuntu/test.log
+	date >> /home/ubuntu/test.log
+	
+🔐 Step 3: Permission dena : without executable permission script won't run
+	chmod +x /home/ubuntu/test.sh    
+
+🧪 Step 4: Manual test (BEST PRACTICE)
+	sh /home/ubuntu/test.sh
+
+👉 check karo:
+	cat /home/ubuntu/test.log
+✔ agar output aa raha hai → script sahi hai
+
+#Now till above we just create script, now to run it for a particular time, we take help of cron means add this script in crontab file.
+
+
+⚙️ Step 5: Cron job add karo
+	crontab -e
+    👉 first time open hoga → editor choose karo (nano easy hai)
+
+	*/5 * * * * /home/ubuntu/test.sh >> /home/ubuntu/cron.log 2>&1
+	🧠 What above line do: */5 → har 5 min script run hogi, output + error → cron.log me save
+	
+	
+✅ Step 6: Verify cron job
+	crontab -l
+	we will see this:*/5 * * * * /home/ubuntu/test.sh >> /home/ubuntu/cron.log 2>&1
+
+🔍 Step 7: Check chal raha hai ya nahi
+	Option 1: log check karo
+	cat /home/ubuntu/test.log
+	
+	Option 2: cron logs
+	grep CRON /var/log/syslog
+	
+Real Flow: 	
+Login → Script banao → chmod +x → manually run → crontab -e → schedule likho → verify → logs check	
+
+Q.2 Script for disk space check : 
+#!/bin/bash
+df -h >> /home/ubuntu/disk.log   -> output screen pe nahi, file me save karo
+
+crontab -e 
+*/10 * * * * /home/ubuntu/disk.sh >> /home/ubuntu/cron.log 2>&1
+
+
+ssh login
+pwd
+ls
+nano disk.sh
+chmod +x disk.sh
+sh disk.sh
+cat disk.log
+crontab -e
+crontab -l
+
+
+>>>>>>>Nano editor:
+💾 Save kaise kare?
+
+Nano commands:
+
+👉 Save: CTRL + O
+
+👉 Enter dabao
+
+👉 Exit: CTRL + X
+
+
+✅ Save ke baad kya hoga?
+
+👉 Cron automatically:
+
+is file ko read karega
+schedule ke hisaab se job run karega
+
+If nano nahi chahiye aur vim use karna hai:
+
+export EDITOR=vim
+crontab -e
+
+
+ls -l disk.sh
+
+👉 Output aisa hona chahiye:
+
+-rwxrwxr-x 1 rblashish07 rblashish07 ...
+
+👉 Important part:
+
+x → execute permission
