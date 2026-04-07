@@ -82,21 +82,68 @@ Nano commands:
 
 👉 Cron automatically:
 
-is file ko read karega
-schedule ke hisaab se job run karega
+	is file ko read karega
+	schedule ke hisaab se job run karega
 
-If nano nahi chahiye aur vim use karna hai:
+	If nano nahi chahiye aur vim use karna hai:
 
-export EDITOR=vim
-crontab -e
+	export EDITOR=vim
+	crontab -e
 
 
-ls -l disk.sh
+	ls -l disk.sh
 
-👉 Output aisa hona chahiye:
+	👉 Output aisa hona chahiye:
 
--rwxrwxr-x 1 rblashish07 rblashish07 ...
+	-rwxrwxr-x 1 rblashish07 rblashish07 ...
 
-👉 Important part:
+	👉 Important part:
 
-x → execute permission
+	x → execute permission
+
+
+
+🔍 How to know issue is there?
+
+🔹 Step 1: Output log check karo (FIRST THING)
+	cat /home/user/cron.log
+
+	👉 Output:
+
+	/bin/sh: 1: /home/user/wrong.sh: not found
+	
+	
+🔹 Step 2: System logs check karo
+	grep CRON /var/log/syslog
+
+	👉 Dikhega: cron job run hui, par error aaya
+	
+🔹 Step 3: Script manually run karo
+	sh /home/user/wrong.sh
+
+	👉 Turant error milega: No such file or directory
+	
+	
+🚀 How to fix ?
+🔹 Step 1: Correct path find karo
+	pwd
+	ls
+
+	👉 ya:
+
+	find / -name script.sh 2>/dev/null
+	
+🔹 Step 2: Cron update karo
+	crontab -e
+
+	👉 Fix karo:
+
+	* * * * * /home/user/correct.sh >> /home/user/cron.log 2>&1
+	
+🔹 Step 3: Logs clear karo
+	> /home/user/cron.log
+	
+🔹 Step 4: Verify
+cat /home/user/cron.log
+
+👉 Ab error nahi aana chahiye
