@@ -1,0 +1,112 @@
+*******************  "2 > &1" and ">>"   
+
+
+🧠 Linux me 2 type ke output hote hain:
+
+1. Normal output (STDOUT) 👉 jo normal result hota hai
+
+2. Error output (STDERR) 👉 jab error aata hai
+
+🔢 Numbers :
+
+1 = STDOUT (normal output)
+2 = STDERR (error output)
+
+
+🔥 1. > kya hota hai?
+command > file.txt
+👉 Matlab: output ko file me daal do (overwrite)
+Example: ls > file.txt 👉 screen pe nahi dikhega,  file me chala jayega
+
+
+🔥 2. >> kya hota hai?
+command >> file.txt
+👉 Matlab: output ko file me append karo (add karo, delete nahi)
+Example:
+date >> file.txt 👉 har baar new line add hogi
+
+
+🔥 3. 2> kya hota hai?
+command 2> error.txt 👉 Matlab:sirf error output file me daalo
+Example:ls wrongfile 2> error.txt
+👉 error file me chala jayega
+
+
+
+🔥 4. 2>&1 (MOST CONFUSING 😄)
+
+👉 Isko simple samajh:
+
+2 → error
+1 → normal output
+2>&1
+
+👉 Matlab: error ko bhi normal output ke saath bhej do
+
+💥 Combine:
+
+command >> file.log 2>&1
+
+🧠 Step by step:
+>> file.log
+👉 normal output file me jaa raha hai
+
+2>&1
+👉 error bhi usi jagah bhej do
+🎯 Final Meaning: 👉 Normal output + Error dono ek hi file me store honge
+
+🧪 Example:
+ls /home >> output.log 2>&1
+
+👉 Agar:
+file mile → output aayega
+nahi mile → error bhi same file me
+
+
+💥 Cron me kyun use karte hain?
+
+👉 Cron me screen nahi hoti 😄
+👉 Isliye:>> log.log 2>&1
+
+👉 taaki:
+success bhi dikhe
+error bhi dikhe
+
+
+🧠 Super Simple Analogy
+
+👉 Think 2 pipes hain:
+
+1 = normal output pipe
+2 = error pipe
+
+👉 2>&1 = dono pipes ko ek hi bucket me daal diya
+
+🎯 Ek line mein
+
+👉 >> = append
+👉 2>&1 = error ko bhi same output me bhejo
+
+🔥 Final Cron Line samajh:
+* * * * * script.sh >> log.log 2>&1
+
+👉 Matlab:
+
+script run
+output + error → log.log me
+
+
+🎯 Linux ke andar 3 default channels hote hain
+Number	Naam	Kaam
+0	STDIN	input
+1	STDOUT	normal output
+2	STDERR	error output
+
+
+🎯 Goal:
+
+👉 STDOUT (normal output) alag file
+👉 STDERR (error) alag file
+
+✅ Syntax:
+command > output.log 2> error.log
