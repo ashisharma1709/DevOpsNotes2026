@@ -1,0 +1,14 @@
+****************** Basic Unix Tools ************* 	
+
+🔍 find /etc : find all files and folders inside /etc folder
+
+find /etc > etcfiles.txt  : find all files in etc and put the list in etcfiles.txt
+
+find /etc -name passwd    : find passwd files inside etc folder
+
+find / -name myfile.txt   : find myfile.txt in the entire system  (may be slow and gives permission error)
+
+find /home -iname myfile.txt  : case insensitive search
+
+
+
