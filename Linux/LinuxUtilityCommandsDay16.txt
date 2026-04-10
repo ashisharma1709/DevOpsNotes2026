@@ -10,5 +10,26 @@ find / -name myfile.txt   : find myfile.txt in the entire system  (may be slow a
 
 find /home -iname myfile.txt  : case insensitive search
 
+find /var -name "*.log"       : it will seaarch all .log files 
+ 
+find /home -type f -name "test.txt"    : it will search only files test.txt not directoy ( for directoy use -d)
+
+find / -size +1G      : identifies large files more than 1 GB
+
+find / -size -10k     : identifies files less that 10 kb
+
+find /etc -mtime -2   : recently changes config files
+
+find /var -mtime -1   : last one day modify files
+
+find /var -mtime +7   : 7 days old files
+
+find /etc -maxdepth 1  : depth control means kitni depth tak seaarch karega, 👉 sirf /etc ke andar (andar ke folders ke andar nahi jayega)
+
+find /etc -maxdepth 2   : it will search files till 2 depth means inside one more folder of /etc
+
+find /var -type f -name "*.log" -mtime -1 -size +10M  👉.log files, last 1 day mein modified, size > 10MB
+
+locate myfile.txt     : it is fast because it uses database
 
 
