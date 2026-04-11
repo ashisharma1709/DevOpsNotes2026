@@ -10,6 +10,12 @@ find / -name myfile.txt   : find myfile.txt in the entire system  (may be slow a
 
 find /home -iname myfile.txt  : case insensitive search
 
+find / -name "file.txt" 2>/dev/null   : find files from / directory and hides errors 
+
+find . -name "file.txt"     : find file.txt in current directory, 👉 ✔ current folder + uske andar sab folders mein search karega
+
+find -name "file.txt"       : same as above command
+
 find /var -name "*.log"       : it will seaarch all .log files 
  
 find /home -type f -name "test.txt"    : it will search only files test.txt not directoy ( for directoy use -d)
@@ -31,5 +37,51 @@ find /etc -maxdepth 2   : it will search files till 2 depth means inside one mor
 find /var -type f -name "*.log" -mtime -1 -size +10M  👉.log files, last 1 day mein modified, size > 10MB
 
 locate myfile.txt     : it is fast because it uses database
+
+
+************** find without maxdepth vs with maxdepth  *****************************
+
+find /etc -name "file.txt"
+
+👉 Default behavior = unlimited depth (jitna andar hai sab search karega)
+
+✅ Output:
+/etc/file.txt
+/etc/folder1/file.txt
+/etc/folder1/folder2/file.txt
+/etc/folder1/folder2/folder3/file.txt
+
+
+👉 -maxdepth 0   -> ✔ sirf current directory (level 0)
+find /etc -maxdepth 0 -name "file.txt"
+✅ Output:
+/etc/file.txt
+
+
+👉 -maxdepth 1   -> ✔ level 0 + level 1
+find /etc -maxdepth 1 -name "file.txt"
+✅ Output:
+/etc/file.txt
+/etc/folder1/file.txt
+
+
+👉 -maxdepth 2   -> ✔ level 0 + 1 + 2
+find /etc -maxdepth 2 -name "file.txt"
+✅ Output:
+/etc/file.txt
+/etc/folder1/file.txt
+/etc/folder1/folder2/file.txt
+
+
+👉 -maxdepth 3   -> ✔ level 0 → 3 (poora structure cover)
+find /etc -maxdepth 3 -name "file.txt"
+✅ Output:
+/etc/file.txt
+/etc/folder1/file.txt
+/etc/folder1/folder2/file.txt
+/etc/folder1/folder2/folder3/file.txt
+
+
+
 
 
