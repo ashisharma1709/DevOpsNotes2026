@@ -98,6 +98,24 @@ maxdepth	kya milega
 -maxdepth N limits how deep find will search from the starting directory, where current directory is level 0.
 
 
+👉 -maxdepth 0 ka matlab:
 
+✔ sirf starting path (.) ko check karo
+❌ uske andar kuch bhi mat dekho
+
+
+.                → level 0
+./file1.txt      → level 1
+./folder1        → level 1
+./folder1/file   → level 2
+
+Sirf level 2 chahiye to :
+find . -mindepth 2 -maxdepth 2 -name "file1.txt"
+✅ Output:
+./folder1/file1.txt
+
+
+level2 se niche sab:
+find . -mindepth 2 -name "file1.txt"
 
 
