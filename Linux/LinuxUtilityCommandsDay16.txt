@@ -41,45 +41,61 @@ locate myfile.txt     : it is fast because it uses database
 
 ************** find without maxdepth vs with maxdepth  *****************************
 
-find /etc -name "file.txt"
+📂 current structure
+. (current dir = level 0)
+├── file1.txt              (level 1)  ✅ new file
+└── folder1                (level 1)
+     └── file1.txt         (level 2)
+	 
+🔍 Commands:
 
-👉 Default behavior = unlimited depth (jitna andar hai sab search karega)
+✅ 1. -maxdepth 0
+find . -maxdepth 0 -name "file1.txt"
 
-✅ Output:
-/etc/file.txt
-/etc/folder1/file.txt
-/etc/folder1/folder2/file.txt
-/etc/folder1/folder2/folder3/file.txt
+👉 sirf . check karega (level 0)
 
+❌ current dir ka naam file1.txt nahi hai
+👉 no output
 
-👉 -maxdepth 0   -> ✔ sirf current directory (level 0)
-find /etc -maxdepth 0 -name "file.txt"
-✅ Output:
-/etc/file.txt
+✅ 2. -maxdepth 1
+find . -maxdepth 1 -name "file1.txt"
 
+👉 check karega:
 
-👉 -maxdepth 1   -> ✔ level 0 + level 1
-find /etc -maxdepth 1 -name "file.txt"
-✅ Output:
-/etc/file.txt
-/etc/folder1/file.txt
+. (level 0)
+uske andar ke entries (level 1)
+Output:
+./file1.txt
 
+✔ kyunki:
 
-👉 -maxdepth 2   -> ✔ level 0 + 1 + 2
-find /etc -maxdepth 2 -name "file.txt"
-✅ Output:
-/etc/file.txt
-/etc/folder1/file.txt
-/etc/folder1/folder2/file.txt
+./file1.txt → level 1 ✔
+./folder1/file1.txt → level 2 ❌ (ignore)
 
 
-👉 -maxdepth 3   -> ✔ level 0 → 3 (poora structure cover)
-find /etc -maxdepth 3 -name "file.txt"
-✅ Output:
-/etc/file.txt
-/etc/folder1/file.txt
-/etc/folder1/folder2/file.txt
-/etc/folder1/folder2/folder3/file.txt
+✅ 3. -maxdepth 2
+find . -maxdepth 2 -name "file1.txt"
+
+👉 check karega level 0 → 2
+
+Output:
+./file1.txt
+./folder1/file1.txt
+
+
+👉 -maxdepth N =
+current directory (level 0) + N levels inside
+
+📊 Easy Table
+maxdepth	kya milega
+0			sirf .
+1			. + direct files/folders
+2			+ unke andar ke files
+3			+ aur andar
+
+
+👉
+-maxdepth N limits how deep find will search from the starting directory, where current directory is level 0.
 
 
 
