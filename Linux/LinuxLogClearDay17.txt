@@ -1,0 +1,254 @@
+***************** COMMAND TO MOVE THE LOG OF A PARTICULAR DATE AND THEN CREATE TAR OF THE LOGS *********************
+
+pwd  -> /data1/UPI/PRM/ConsumerLogFiles/
+find . -maxdepth 1 -type f -name "REQRESPTOPIC" -newermt "2026-04-05" ! -newermt "2026-04-06" -exec mv {} /data1/UPI/PRM/ConsumerLogFiles/ArchiveLogs/Apr/05 \;
+cd /data1/UPI/PRM/ConsumerLogFiles/ArchiveLogs/Apr/05
+nohup tar -czvf 05.tar.gz *.log > tar.log 
+🧠 Overall Meaning:
+
+👉 Current directory (.) me jo files: sirf files ho (folder nahi)
+naam "REQRESPTOPIC" ho
+5 April 2026 ko modified hui ho (pure din)
+➡️ unko move kar do ek archive folder me.
+
+
+➡️ find .
+
+👉 find command search ke liye use hota hai
+👉 . ka matlab = current directory
+
+📌 Meaning:
+"Current directory ke andar search karo"
+
+➡️ maxdepth 1
+
+👉 Ye define karta hai kitna deep search karna hai
+
+0 → sirf current folder (khud)
+1 → current + uske andar ke files/folders
+2 → aur andar tak
+
+📌 Yahan:
+👉 Sirf current folder ke andar tak search (recursive deep nahi)
+
+➡️ type f
+
+👉 type filter lagata hai
+
+f → file
+d → directory
+l → symlink
+
+📌 Yahan:
+👉 Sirf files chahiye (folders ignore)
+
+➡️ name "REQRESPTOPIC"
+
+👉 File name filter
+
+📌 Yahan:
+👉 Exact naam "REQRESPTOPIC" wali files
+
+⚠️ Important:
+
+Agar pattern hota like "*.log" → sab log files
+Yahan exact match ho raha hai
+
+
+➡️ newermt "2026-04-05"
+
+👉 Ye modification time (mtime) check karta hai
+
+newermt = newer than modification time
+"2026-04-05" = date
+
+📌 Meaning:
+👉 Jo files 5 April 2026 ke baad modify hui hain
+
+➡️  ! -newermt "2026-04-06"
+
+👉 ! = NOT
+
+📌 Meaning:
+👉 Jo files 6 April 2026 ke baad modify nahi hui hain
+
+🔥 Combine karo -newermt "2026-04-05" AND NOT newer than "2026-04-06"
+
+👉 Result:
+✔️ Files modified between:
+
+2026-04-05 00:00:00  →  2026-04-05 23:59:59
+
+📌 Simple:
+👉 Sirf 5 April wale files
+
+➡️ -exec
+
+👉 Ye action perform karta hai jo files milti hain
+
+Syntax:
+
+-exec command {} \;
+
+
+➡️ mv {} /data1/...
+
+👉 mv = move command
+
+👉 {} = current file (jo find ne match ki)
+
+📌 Meaning:
+👉 Har matching file ko move karo target folder me
+
+➡️ {}
+
+👉 Placeholder hai
+
+📌 Matlab:
+👉 "Jo file abhi find ko mili hai"
+
+Example:
+
+mv file1.txt destination/
+mv file2.txt destination/
+
+➡️  \;
+
+👉 -exec ko terminate karta hai
+
+📌 Ye likhna mandatory hai
+
+⚠️ ; ko escape (\;) karna padta hai
+warna shell usko alag treat karega
+
+
+
+👉 Ye command useful hai:
+
+log rotation
+archive cleanup
+date-wise file segregation
+⚠️ Important Tips
+
+✔️ Destination folder exist hona chahiye
+✔️ warna mv error dega
+✔️ multiple files same naam ke ho sakte hain → overwrite issue
+
+💡 Bonus Optimization
+
+Agar bahut files ho:
+
+-exec mv {} destination \;
+
+slow hota hai
+
+👉 Fast version:
+
+-exec mv {} destination +
+
+
+nohup tar -czvf 05.tar.gz *.log > tar.log 2>&1 &
+🧠 Overall Meaning
+
+👉 Sab .log files ka compressed tar (archive) banao
+👉 Background me run karo
+👉 Output + error dono tar.log me save karo
+👉 Terminal band ho jaye tab bhi process chale
+
+
+1️⃣ nohup
+
+👉 Full form: no hang up
+
+📌 Problem:
+
+Normally agar tum terminal band kar do → process bhi band ho jata hai
+
+📌 Solution:
+👉 nohup use karne se:
+✔️ Process background me chalta rahega
+✔️ logout/terminal close hone par bhi nahi rukega
+
+
+2️⃣ tar
+
+👉 Archiving tool (Linux me bahut common)
+
+3️⃣ -czvf
+
+👉 Ye flags ka combo hai — ek-ek samjho:
+
+🔹 -c (create)
+
+👉 New archive create karo
+
+🔹 -z (gzip compression)
+
+👉 .gz compression use karo
+
+📌 Output → .tar.gz
+
+🔹 -v (verbose)
+
+👉 Screen pe show karega kaun kaun files add ho rahi hain
+
+🔹 -f (file)
+
+👉 Archive ka naam specify karne ke liye
+
+
+4️⃣ 05.tar.gz
+
+👉 Output archive file ka naam
+
+📌 Meaning:
+👉 Sab logs → is file me pack ho jayenge
+
+5️⃣ *.log
+
+👉 Wildcard
+
+📌 Meaning:
+👉 Current directory ke sab .log files
+
+
+
+6️⃣ > tar.log
+
+👉 Output redirection
+
+📌 Meaning:
+👉 Jo bhi normal output (stdout) hai → tar.log me likho
+
+7️⃣ 2>&1
+
+👉 Ye thoda tricky hai 🔥
+
+Breakdown:
+1 = stdout
+2 = stderr (error)
+
+👉 2>&1 ka matlab:
+➡️ error ko bhi stdout ke saath same jagah bhejo
+
+📌 Final:
+👉 Output + error dono tar.log me
+
+
+8️⃣ &
+
+👉 Background execution
+
+📌 Meaning:
+👉 Command background me run karega
+👉 Terminal free ho jayega
+
+🔥 Real Execution Flow
+nohup → process ko detach karta hai terminal se
+tar → sab .log files compress karta hai
+Output + error → tar.log me store
+& → background me run
+
+
+
+
