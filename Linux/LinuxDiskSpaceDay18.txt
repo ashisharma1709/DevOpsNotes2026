@@ -1,0 +1,146 @@
+************************** Disk Related Commands **********************
+
+fdisk -l :- display disk partition, sizes and type with the command
+
+df -h :- free and used space on mounted systems
+
+df :- disk free reports available space and used space ind drive accessible by our systems
+
+du :- report the amount of dissk space used by hierachy of directories in bytes
+
+du -ah :- disk usage for all directories and files.
+
+du -sh :- disk usage of the directory u are currently in 
+
+findmnt :- target mount point for all file system.
+
+
+
+
+Practical:
+
+🔹 1. fdisk -l
+
+👉 Purpose: Show disk partitions (low-level disk structure)
+
+What it shows:
+All disks (like /dev/sda, /dev/sdb)
+Partition table
+Size of each partition
+Type (Linux, swap, etc.)
+
+Example use:
+fdisk -l
+
+
+
+When to use:
+When you want to inspect disks before mounting
+While doing disk setup / partitioning
+Troubleshooting disk-level issues
+
+👉 Think: "Physical disk structure dekhna hai"
+\
+
+
+🔹 2. df -h 👉 Purpose: Show disk space usage of mounted filesystems
+
+What it shows:Total space,Used space,Available space,Mount point
+
+Example:
+df -h
+
+
+root@ashishvm5:~# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       8.7G  4.6G  4.1G  54% /
+tmpfs           2.0G     0  2.0G   0% /dev/shm
+tmpfs           783M  1.1M  782M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+efivarfs        256K   32K  220K  13% /sys/firmware/efi/efivars
+/dev/sda16      881M  121M  699M  15% /boot
+/dev/sda15      105M  6.2M   99M   6% /boot/efi
+tmpfs           392M   12K  392M   1% /run/user/1002
+
+👉 -h = human readable (GB, MB)
+
+When to use:
+To check server disk full hai ya nahi
+Monitoring storage in production
+
+👉 Think: "System ko kitna disk available hai"
+
+
+🔹 3. df 👉 Same as above but not human readable
+
+df👉 Shows in bytes/blocks, harder to read.
+
+🔹 4. du 👉 Purpose: Check disk usage of files/directories
+
+Example:
+du
+
+👉 Shows size of each directory (in bytes)
+
+
+5. du -ah
+
+👉 Shows:All files + directorie, Human readable format
+du -ah
+
+
+🔹 6. du -sh
+
+👉 Most commonly used du -sh *
+
+👉 Shows:Total size of each folder in current directory
+
+
+🔹 7. findmnt
+
+👉 Purpose: Show mounted filesystems (clean structured view)
+
+findmnt
+What it shows: Source (disk), Target (mount point), Filesystem type
+
+👉 Better formatted than mount
+
+
+💡 Simple Real-Life Analogy
+
+👉 df:
+
+"Mere phone me total storage kitna bacha hai?"
+
+👉 du:
+
+"Kaunsa app sabse zyada storage le raha hai?"
+
+
+🔹 8. free command (Memory check)
+
+👉 RAM usage dekhne ke liye use hota hai
+
+free -h
+Output samajh:
+              total   used   free   shared   buff/cache   available
+Mem:           8GB     3GB    1GB     200MB       4GB         4.5GB
+Swap:          2GB     0GB    2GB
+Meaning:
+total → total RAM
+used → used memory
+free → actual free RAM
+buff/cache → system ne cache ke liye use kiya (ye free ho sakta hai)
+available → real usable memory
+
+
+👉 Disk structure dekhne ke liye BEST command
+
+lsblk  -> shows disks, partition, LVM
+Output example:
+sda
+ ├─sda1
+ ├─sda2
+sdb
+ └─sdb1
+     └─my_vg-my_lv
