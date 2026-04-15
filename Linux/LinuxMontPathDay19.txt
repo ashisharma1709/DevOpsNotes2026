@@ -1,0 +1,166 @@
+👉 Mount path wo folder hai jahan disk attach hoti hai aur jahan se tum usko access karte ho
+
+🔹 Mount Path kya hota hai?
+
+👉 Mount path = wo location (directory) jahan disk ya partition attach hota hai system mein
+
+💡 Easy Example (Mobile Analogy)
+Tumhare paas memory card (disk) hai
+Aur tum usko phone mein insert karte ho
+
+👉 Phone mein wo dikhega:/storage/sdcard , Ye mount path hai
+
+💻 Linux Example
+
+Linux mein disk directly use nahi hoti
+👉 Usko kisi folder ke saath attach (mount) karna padta hai
+
+Example:
+
+Disk:/dev/sdb1
+
+Mount path:/data
+
+👉 Matlab:
+
+/dev/sdb1  →  /data
+
+Ab jo bhi /data ke andar dikhega
+👉 wo actually us disk ka content hai
+
+
+🔍 Example using df -h
+df -h
+
+Output:
+
+Filesystem     Size  Used  Avail  Mounted on
+/dev/sda1       50G   20G    30G   /
+/dev/sdb1      100G   10G    90G   /data
+
+👉 Yahan:
+
+/ = root mount path
+/data = dusri disk ka mount path
+🔹 Common Mount Paths
+/ → main root filesystem
+/home → user data
+/var → logs
+/mnt → temporary mounts
+/data → custom mounts (production)
+
+
+🔹 Mount Path kaise create karte hain?
+
+👉 Simple answer: Mount path ek normal directory hota hai, Usko hum mkdir se create karte hain
+
+✅ Step 1: Mount Path (Directory) create karo
+mkdir /data
+
+👉 Ab /data ek empty folder hai
+👉 Ye future mein mount point banega
+
+✅ Step 2: Disk ko mount karo
+mount /dev/sdb1 /data
+
+👉 Matlab:
+/dev/sdb1 = disk/partition
+/data = mount path
+
+🔥 Ab kya hua?
+
+👉 /data ke andar jo bhi dikhega
+👉 wo actually disk /dev/sdb1 ka content hai
+
+
+Disk → Partition → PV → VG → LV → Filesystem → Mount Path
+
+🔹 1. Disk kya hota hai?
+
+👉 Physical storage device
+Example:
+/dev/sda
+/dev/sdb
+
+🔹 2. PV (Physical Volume):  Disk ya partition ko LVM ke liye prepare karna
+
+pvcreate /dev/sdb1
+
+👉 Ab ye LVM ka part ban gaya
+
+🔹 3. VG (Volume Group) 👉 Multiple PV ko combine karke ek pool banana
+
+vgcreate my_vg /dev/sdb1
+
+👉 Ye ek storage pool hai
+
+🔹 4. LV (Logical Volume)
+
+👉 VG ke andar se logical partition banana
+
+lvcreate -L 10G -n my_lv my_vg
+
+👉 Ye hi actual usable volume hai
+
+🔹 5. Filesystem banana
+
+👉 LV ko format karna padta hai
+
+mkfs.ext4 /dev/my_vg/my_lv
+🔹 6. Mount karna
+mkdir /data
+mount /dev/my_vg/my_lv /data
+🔥 FINAL FLOW (Real Understanding)
+/dev/sdb → /dev/sdb1 → PV → VG → LV → ext4 → /data
+
+
+🔹 6. /etc/fstab 👉 Permanent mount configuration file
+
+Location:/etc/fstab
+Example:
+/dev/my_vg/my_lv   /data   ext4   defaults   0 0
+
+👉 System boot pe automatically mount karega
+
+
+
+🔹 7. Inode Concept: Disk have two things : diskspace(20gb) and inodes =10,00,000(max 10 lakh file bana sate ho even disk space available ho)
+
+👉 Inode = file ka metadata (not content)
+
+Store karta hai:file sizeermissions
+owner
+location
+🔥 Important:
+
+👉 Disk full hone ke 2 reasons ho sakte hain:
+
+1. Space full
+df -h
+2. Inode full
+df -i
+💡 Example:
+
+👉 Bahut chhoti files (lakhs mein):
+
+Space kam use hoga
+BUT inode khatam ho jayega 😱
+
+df -i -> check innode usage
+
+Filesystem     Inodes   IUsed   IFree   IUse% Mounted on
+/dev/sda1      100000   100000     0     100%   /
+
+Find where is the issue:
+du --inodes -h /
+
+🔥 Step 3: Clean (IMPORTANT)
+✅ 1. Old logs delete karo
+find /var/log -type f -name "*.log" -delete
+✅ 2. Temp files clean
+rm -rf /tmp/*
+✅ 3. Cache clean
+rm -rf /var/cache/*
+
+
+lsof | grep deleted  -> file delted but still process uses it s
