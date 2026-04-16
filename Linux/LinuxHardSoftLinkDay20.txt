@@ -1,0 +1,62 @@
+******************************* HardLink AND SoftLink in Linux ******************
+
+
+👉 Link = ek file ka shortcut / reference
+
+🔥 2 Types of Links
+Hard Link
+Soft Link (Symbolic Link)
+
+🔹 1. Hard Link kya hota hai?
+
+👉 Same file ke liye ek aur naam, Dono file actually same inode ko point karti hain
+
+💡 Example:
+touch file1
+ln file1 file2
+
+👉 Ab:file1 aur file2 → SAME data, SAME inode
+🔥 Behavior:
+✔ file1 delete karo → file2 still works
+✔ data same rahega
+✔ koi “original” concept nahi hota
+
+🔍 Check inode:
+ls -li
+
+👉 Dono ka inode number same hoga
+
+
+
+🔹 2. Soft Link (Symbolic Link)
+
+👉 Shortcut hota hai (pointer to file path)
+
+💡 Example:
+ln -s file1 file3
+
+👉 file3 → file1 ka shortcut hai
+
+🔥 Behavior:
+
+❌ file1 delete → file3 broken 😱
+✔ inode alag hota hai
+✔ sirf path store karta hai
+
+
+🔥 Why Needed? (Real Use Cases)
+✅ Hard Link Use Case
+
+👉 When:
+Same data multiple names se access karna ho
+Backup system mein use hota hai
+
+👉 Example:
+
+Log rotation
+File versioning
+
+
+✅ Soft Link Use Case (MOST COMMON 🔥)
+1. Shortcut create karna
+ln -s /opt/app/config /home/user/config
