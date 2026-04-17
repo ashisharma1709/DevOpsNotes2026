@@ -60,3 +60,62 @@ File versioning
 ✅ Soft Link Use Case (MOST COMMON 🔥)
 1. Shortcut create karna
 ln -s /opt/app/config /home/user/config
+
+🔹 Problem :
+
+Linux ko 2 alag problems solve karni hoti hain:
+
+Problem 1:
+
+👉 Same data ko multiple naam se access karna
+👉 WITHOUT duplicating storage
+
+Problem 2:
+
+👉 Flexible shortcut / redirection system chahiye
+👉 Jahan file location change ho sakti hai
+
+
+✅ 1. Deployment System (Soft Link ka KING use case)
+
+👉 Suppose we deploy app:
+/var/www/app_v1
+/var/www/app_v2
+/var/www/app_v3
+
+👉 Ek link banate hain:
+
+ln -s /var/www/app_v3 /var/www/current
+
+👉 Server always use karega: /var/www/current
+
+🔥 Ab kya fayda?
+
+👉 New version deploy:
+ln -sfn /var/www/app_v4 /var/www/current
+
+👉 Bas link change → zero downtime deploy 🔥
+
+✅ 2. Config Management (Soft Link) 👉 Same config multiple jagah use karna:
+
+ln -s /opt/config/app.conf /etc/app.conf
+👉 Ek jagah change → sab jagah reflect
+
+
+
+HardLink UseCase :
+✅ 3. Log Rotation / Backup (Hard Link use hota hai)
+
+👉 Same file ko backup naam dena:
+ln logfile logfile_backup
+
+👉 Storage same use ho raha hai (efficient)
+
+
+✅ 4. Package Managers (Advanced use)
+
+👉 Linux internally use karta hai:
+
+Same file ko multiple jagah reference dene ke liye
+Space optimize karne ke liye
+
