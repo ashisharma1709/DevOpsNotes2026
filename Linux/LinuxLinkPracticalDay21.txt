@@ -1,0 +1,117 @@
+************************ Hardlink And SoftLink Practical **********************
+
+
+🔥 STEP 1: Test setup 
+mkdir /tmp/link-test
+cd /tmp/link-test
+echo "Hello DevOps" > file1.txt
+
+👉 Check: cat file1.txt
+
+🔹 STEP 2: Hard Link create karo
+ln file1.txt hardlink.txt
+👉 Verify inode: ls -li
+
+👉 Output:
+file1.txt and hardlink.txt → same inode number ✅
+🔥 TEST 1: Modify data
+echo "New line" >> hardlink.txt
+
+👉 Check: cat file1.txt
+👉 ✔ Same content show hoga
+👉 Because dono SAME file hain internally
+
+🔥 TEST 2: Delete original
+rm file1.txt
+
+👉 Check:
+cat hardlink.txt
+👉 ✔ File still exists 😎
+👉 Hard link survived
+
+
+
+Soft link example:
+
+🔹 STEP 3: Soft Link create karo
+echo "Soft Link Test" > file2.txt
+ln -s file2.txt softlink.txt
+
+👉 Verify:
+
+ls -l
+
+👉 Output:softlink.txt -> file2.txt
+
+
+🔥 TEST 3: Modify via soft link
+echo "Added via softlink" >> softlink.txt
+
+👉 Check:cat file2.txt
+✔ Change reflect hoga
+
+🔥 TEST 4: Delete original (IMPORTANT)
+rm file2.txt
+
+👉 Now check:cat softlink.txt
+
+👉 ❌ Error:No such file or directory
+
+👉 Soft link broken 😱
+
+
+
+************************* Create a soft link(Symlink or symbolic link) between folder ***************************
+
+🔥 STEP 4: Real DevOps Scenario (IMPORTANT 🔥)
+
+Version-based deployment simulation
+mkdir app_v1 app_v2
+echo "Version 1" > app_v1/index.html
+echo "Version 2" > app_v2/index.html
+
+Create current symlink
+ln -s app_v1 current
+
+👉 Check:cat current/index.html
+
+👉 Output:Version 1
+
+Switch version (NO downtime 🔥)
+rm current
+ln -s app_v2 current
+
+👉 Check:cat current/index.html
+
+👉 Output:Version 2
+
+
+👉 Direct replace symlink:
+ln -sfn app_v2 current
+
+👉 No need to delete first
+
+
+
+Practical output : 
+
+rblashish07@ashishvm5:~$ ln -s app_v2 current
+rblashish07@ashishvm5:~$ ls -ltr
+total 12
+drwxrwxr-x 3 rblashish07 rblashish07 4096 Apr 11 10:06 folder1
+-rw-rw-r-- 1 rblashish07 rblashish07    0 Apr 11 13:18 file1.txt
+drwxrwxr-x 2 rblashish07 rblashish07 4096 Apr 18 14:07 app_v2
+drwxrwxr-x 2 rblashish07 rblashish07 4096 Apr 18 14:07 app_v1
+lrwxrwxrwx 1 rblashish07 rblashish07    6 Apr 18 14:08 current -> app_v2
+rblashish07@ashishvm5:~$ ln -snf app_v1 current
+rblashish07@ashishvm5:~$ ls -ltr
+total 12
+drwxrwxr-x 3 rblashish07 rblashish07 4096 Apr 11 10:06 folder1
+-rw-rw-r-- 1 rblashish07 rblashish07    0 Apr 11 13:18 file1.txt
+drwxrwxr-x 2 rblashish07 rblashish07 4096 Apr 18 14:07 app_v2
+drwxrwxr-x 2 rblashish07 rblashish07 4096 Apr 18 14:07 app_v1
+lrwxrwxrwx 1 rblashish07 rblashish07    6 Apr 18 14:08 current -> app_v1
+rblashish07@ashishvm5:~$ 
+
+
+
