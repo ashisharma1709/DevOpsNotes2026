@@ -1,0 +1,34 @@
+************************** LINUX UMASK CONCEPT *******************
+
+Linux mein umask (user mask) ek permission control mechanism hai jo decide karta hai ki newly created files aur directories par by default kaunsi permissions remove hongi.
+
+🔹 Simple : Jab bhi hum koi file ya directory create karte hain, system ek default permission set deta hai:
+File ka default: 666 (rw-rw-rw-)
+Directory ka default: 777 (rwxrwxrwx)
+
+👉 Lekin umask in permissions ko restrict karta hai (minus karta hai)
+
+🔹 Umask ka kaam kya hai?
+
+Umask batata hai: "Kaunsi permissions DENY karni hai by default"
+
+🔹 Example:
+
+Agar umask = 022 hai:
+
+📁 Directory ke liye:
+777 - 022 = 755
+(rwxr-xr-x)
+
+📄 File ke liye:
+666 - 022 = 644
+(rw-r--r--)
+
+
+Check current umask:
+
+👉 umask
+
+Set new umask:
+
+👉 umask 027
