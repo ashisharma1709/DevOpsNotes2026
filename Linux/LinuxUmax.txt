@@ -32,3 +32,28 @@ Check current umask:
 Set new umask:
 
 👉 umask 027
+
+🔹 Important Points
+
+✔️ Sirf creation time pe apply hota hai
+✔️ Existing file pe effect nahi ❌
+✔️ Har user ka alag ho sakta hai
+✔️ System security ke liye use hota hai
+
+
+🔹 Check umask
+umask
+🔹 Set umask
+umask 002
+🔹 Permanent umask
+echo "umask 002" >> ~/.bashrc
+
+
+umask -S
+
+👉 output:u=rwx,g=rwx,o=rx
+
+👉 matlab:
+owner → full
+group → full
+others → no write
