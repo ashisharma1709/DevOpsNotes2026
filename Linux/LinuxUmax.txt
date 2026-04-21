@@ -57,3 +57,53 @@ umask -S
 owner → full
 group → full
 others → no write
+
+
+👉 umask -S kya dikhata hai?
+
+👉 Final permission nahi dikhata
+👉 Ye dikhata hai:
+
+“Default se kya remove nahi hua”
+
+Step 1: Default file permission
+666 → rw-rw-rw-
+
+👉 Notice:
+
+❗ file mein execute (x) hota hi nahi by default
+
+Step 2: Umask = 0004
+Remove → others ka read (r)
+
+Step 3: Apply karo
+rw-rw-rw-
+      ↓ remove 'r' from others
+rw-rw--w-
+
+👉 Result:
+
+-rw-rw--w-
+
+❓ “umask -S mein o=wx kyu?”
+umask -S
+u=rwx,g=rwx,o=wx
+
+👉 iska matlab:
+
+owner → kuch bhi remove nahi
+group → kuch bhi remove nahi
+others → read remove kiya
+
+👉 isliye bacha: wx
+
+
+Directory case (777)
+777 → rwxrwxrwx
+umask 004 → remove 'r' from others
+Result → rwxrwx-wx  ✅ (o=wx match)
+
+File case (666)
+666 → rw-rw-rw-
+umask 004 → remove 'r' from others
+Result → rw-rw--w-  ❗ (no x, because x tha hi nahi)
