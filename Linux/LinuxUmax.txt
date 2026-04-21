@@ -107,3 +107,20 @@ File case (666)
 666 → rw-rw-rw-
 umask 004 → remove 'r' from others
 Result → rw-rw--w-  ❗ (no x, because x tha hi nahi)
+
+
+🔹 Given:umask 0077
+
+🔹 Step-by-step
+
+📄 File default: 
+666 → rw-rw-rw-
+❌ Umask kya hataega:
+077 → group aur others se sab hata do
+
+🔹 Final result:
+rw-------  → 600
+
+👉 Exact output:
+
+-rw-------
