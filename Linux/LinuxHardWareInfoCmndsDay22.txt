@@ -1,0 +1,110 @@
+******************** Hardware Related Info Commands ***********************
+
+
+🔹 lsblk
+
+👉 Block devices (storage)ki inforamtion deta hai
+
+Hard disk, SSD, partitions dikhata hai
+
+Example output:
+sda      8:0    0 100G  0 disk
+├─sda1   8:1    0  50G  0 part
+
+📌 Use case:
+Disk structure dekhna
+Mount points check
+
+
+
+🔹 dmesg
+
+👉 Kernel messages dikhata hai (boot + hardware logs)
+
+📌 
+USB detect hua ya nahi
+Disk errors
+Driver issues
+
+📌 DevOps use:
+Debugging hardware issues
+System boot problems
+
+
+🔹 cat /proc/cpuinfo 👉 CPU ki detailed info deta hai
+
+📌 It gives:
+CPU cores
+Model name
+Clock speed
+
+Example:
+processor : 0
+model name : Intel(R) Xeon(R)
+cpu cores : 2
+
+
+🔹 lshw 👉 Complete hardware info
+
+📌 It gives:
+CPU
+RAM
+Disk
+Network card
+
+
+🔹 ./test.sh 👉 Execute script present in current working directory
+
+📌 Condition:
+File executable honi chahiye
+chmod +x test.sh
+
+
+🔹 sh test.sh  👉 Shell (sh) ke through script run karta hai
+
+📌 Difference:
+
+executable permission not required
+
+🔥 Important Difference (./test.sh vs sh test.sh)
+
+./test.sh	executable permission required, OS directly run karta hai
+sh test.sh	permission not required, shell interpret karta hai
+
+
+#!/bin/bash
+🔹 What is Shebang?
+
+A shebang tells the system which interpreter to use to run the script.
+
+👉 Example:
+
+#!/bin/bash
+echo "Hello"
+
+👉 Iska kaam:
+OS ko batana kaunsa interpreter use karna hai
+Jaise: bash, sh, python, etc.
+
+🔹 Required hai kya?
+✅ Case 1:
+./test.sh
+👉 Yahan shebang zaroori hai
+
+System check karega first line
+Decide karega kaise run karna hai
+
+
+❌ Case 2:
+sh test.sh
+👉 Yahan shebang required nahi hai
+Tum already bol rahe ho: “sh se run karo”
+
+🔹 Best practice (important for DevOps)
+
+Always likho:
+#!/usr/bin/env bash
+
+👉 Ye better hai because:
+Different systems pe bash ka path change ho sakta hai
+Ye automatically correct bash find karta hai
