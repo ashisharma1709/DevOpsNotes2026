@@ -1,0 +1,182 @@
+🔹 What is AWS ?
+
+Amazon Web Services (AWS) ek cloud computing platform hai.
+👉 Hum bina apna physical server kharide, internet ke through servers, storage, database use kar sakte hain.
+
+Matlab:
+Pehle kya hota tha → Company apna data center banati thi 💸
+Ab kya hota hai → AWS se rent pe le lo
+
+
+🔹 What is DataCenter?
+
+Data Center = ek physical building jahan:servers lage hote hain,networking devices hote hain,cooling systems hote hain.
+
+👉 Ye real physical machines hoti hain (virtual nahi)
+
+
+🔹 What is Region?
+
+Region = ek geographic area jahan AWS apne multiple data centers rakhta hai.
+
+Example:
+Mumbai region
+US East (Virginia)
+Europe (London)
+
+👉 Tum jab AWS use karte ho, tum choose karte ho ki tumhara data kis region mein rahe
+
+
+🔹What is Availability Zone (AZ)?
+
+AZ = ek region ke andar ka ek isolated data center (ya group of data centers)
+
+👉 Har region ke andar multiple AZs hote hain
+
+Example:
+
+Mumbai region ke andar:
+ap-south-1a
+ap-south-1b
+ap-south-1c
+
+👉 Ye AZs:physically alag hote hain, independent power & network hota hai
+
+
+Flow:
+
+👉 Data Center → AZ → Region → AWS
+
+Ek AZ mein ek ya multiple data centers
+Ek Region mein multiple AZs
+
+
+Socho:
+🏢 Data Center = ek building
+🏙️ AZ = ek area jahan multiple buildings hain
+🌍 Region = ek city
+☁️ AWS = poori duniya ka network
+
+
+Why multiple AZs?
+
+👉 Agar ek AZ down ho jaye:dusre AZ mein app chalti rahe, high availability milti hai.
+
+Mumbai = 1 Region (multiple AZs ke saath)
+Hyderabad = 1 alag Region (apne AZs ke saath)
+ 
+👉 Region = City level
+👉 AZ = us city ke andar ke isolated data centers
+
+
+
+
+🔹 1. What is Cloud Computing?
+
+Cloud computing =
+👉 Internet ke through IT resources use karna (servers, storage, DB, etc.)
+
+Instead of:
+apna server kharidna ❌
+maintenance karna ❌
+
+Hum simply:AWS se rent pe lete hain ✅
+
+
+🔹 2. On-Premise vs Cloud
+
+🏢 On-Premise
+Apna data center
+High cost 💸
+Maintenance khud
+
+☁️ Cloud (AWS)
+No hardware
+Pay-as-you-go
+Scale easily
+
+👉 DevOps mein mostly cloud hi use hota hai
+
+🔹 3. Types of Cloud Services
+
+🔸 IaaS (Infrastructure as a Service) 👉 Tumhe server milta hai, baaki sab tum manage karo
+
+Example:
+AWS EC2
+Tum control karte ho:
+OS
+software
+configs
+
+
+🔸 PaaS (Platform as a Service) 👉 Platform ready milta hai, tum bas code deploy karo
+
+Example:
+AWS Elastic Beanstalk
+
+
+🔸 SaaS (Software as a Service) 👉 Ready-made software use karo
+
+Examples:
+Gmail
+Google Docs
+
+
+🔹 4. Pay-as-you-go Model 👉 Jo use karoge sirf uska paisa doge
+
+Server 1 hour use kiya → 1 hour ka bill
+Storage 10GB → utna hi charge
+
+⚠️ Important:
+Agar resources band nahi kiye → bill chalta rahega
+
+
+🔹 5. Scalability vs Elasticity
+
+🔸 Scalability 👉 System ko bada ya chhota karna
+
+Vertical scaling → RAM/CPU badhao, increaseing in the same machine. Example : Increasing size of database
+Horizontal scaling → servers add karo, increaing no of machines. Example: Adding one more web servers, to handle web request for application.
+
+🔸 Elasticity 👉 Auto scale based on demand. Deals with adding and removing capactity(resources, memory and disk), whenever it is needed.
+
+Example: EC2,EBS,ECR,ECS,EFS,EKS,etc.
+Traffic badha → servers auto add
+Traffic kam → servers auto remove
+
+
+🔹 6. High Availability 👉 System always up rahe
+
+Kaise?
+Multiple AZs use karke. Agar ek fail ho:dusra handle kare
+
+
+🔹 7. Fault Tolerance 👉 System fail hone ke baad bhi kaam kare
+
+Example:
+2 servers running
+1 crash → dusra still running
+
+
+🔹 8. Load Balancing 👉 Traffic ko multiple servers mein distribute karna
+
+Example:
+1000 users → 4 servers mein divide
+👉 Ek server pe load nahi padta
+
+
+🔹 9. Virtualization 👉 Ek physical server ko multiple virtual servers mein divide karna
+
+Iske bina cloud possible nahi hota
+Example:
+Ek machine → multiple EC2 instances
+
+
+🔹 10. Shared Responsibility Model
+👉 AWS aur user dono ki responsibility hoti hai
+
+AWS → hardware, data center
+Tum → OS, security, data
+
+
+
