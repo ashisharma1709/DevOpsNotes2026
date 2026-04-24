@@ -1,0 +1,89 @@
+************************ AWS Basics ******************************
+
+
+What is AWS?
+
+Amazon Web Services (AWS) ek cloud computing platform hai jo Amazon provide karta hai.
+Iska matlab: tum bina apne servers kharide, internet ke through servers, storage, database, networking, AI tools, etc. use kar sakte ho.
+
+Why AWS is important?
+
+Cost saving 💰 → Hardware kharidne ki zarurat nahi
+Scalability 📈 → Traffic badhe to resources instantly badha sakte ho
+High availability 🌍 → Multiple regions & zones (downtime kam)
+Security 🔒 → Enterprise-level security
+Pay-as-you-go 💡 → Sirf jitna use karo utna pay karo
+
+
+Top 15 AWS Services (simple explanation)
+
+1. EC2 (Elastic Compute Cloud)
+👉 Virtual server (VM) jahan tum apni application run karte ho
+Example: Java Spring Boot app deploy karna
+
+2. S3 (Simple Storage Service)
+👉 File storage (images, videos, backups)
+Example: User profile images store karna
+
+3. RDS (Relational Database Service)
+👉 Managed SQL databases (MySQL, PostgreSQL)
+Example: App ka database manage karna
+
+4. DynamoDB
+👉 NoSQL database (fast & scalable)
+Example: Real-time apps, gaming data
+
+5. Lambda
+👉 Serverless compute (code run without server)
+Example: API hit hone par code run
+
+6. IAM (Identity and Access Management)
+👉 Users & permissions control
+Example: Kaun kya access karega AWS me
+
+7. VPC (Virtual Private Cloud)
+👉 Private network AWS ke andar
+Example: Secure network setup
+
+8. CloudFront
+👉 CDN (Content Delivery Network)
+Example: Website fast load karna globally
+
+9. CloudWatch
+👉 Monitoring & logs
+Example: Server CPU usage dekhna
+
+10. Elastic Beanstalk
+👉 Easy app deployment
+Example: Code upload karo, AWS sab handle karega
+
+11. EBS (Elastic Block Store)
+👉 Disk storage for EC2
+Example: Server ke liye hard disk
+
+12. SNS (Simple Notification Service)
+👉 Notifications send karna (email/SMS)
+Example: Alerts bhejna
+
+13. SQS (Simple Queue Service)
+👉 Message queue (decouple systems)
+Example: Background jobs handle karna
+
+14. API Gateway
+👉 APIs create & manage karna
+Example: REST APIs expose karna
+
+15. ECS / EKS
+👉 Containers run karna
+
+ECS → AWS managed
+EKS → Kubernetes based
+Example: Docker apps run karna
+
+Simple real-life example:
+
+User app open karta hai → CloudFront
+Request API pe jata hai → API Gateway
+Backend run hota hai → Lambda / EC2
+Data store hota hai → RDS / DynamoDB
+Images store hoti hain → S3
