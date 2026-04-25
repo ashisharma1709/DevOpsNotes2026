@@ -1,0 +1,87 @@
+*********************** AWS Architecture **************************
+
+
+AWS Architecture:
+
+AWS architecture ka matlab hota hai kaise different AWS services milke ek complete system banati hain — jaise ek web app ya backend system.
+
+🌍 1. High-Level AWS Architecture Flow
+User → CloudFront → Load Balancer → EC2 / Lambda → Database → Storage
+
+Ab isko detail me break karte hain 👇
+
+🧩 2. Core Components of AWS Architecture
+
+🌐 1. DNS (Domain Name System) 
+
+👉 Amazon Route 53 : Domain ko IP se map karta hai
+Example: google.com → server IP
+
+
+🚀 2. CDN (Fast Delivery)
+👉 Amazon CloudFront
+Static content fast deliver karta hai
+Example: images, videos
+
+
+⚖️ 3. Load Balancer
+👉 Elastic Load Balancing: Traffic ko multiple servers me distribute karta hai, Overload avoid hota hai
+
+
+🖥️ 4. Compute Layer
+👉 Amazon EC2 -> full server control
+👉 AWS Lambda  → serverless (event-based)
+
+
+🗄️ 5. Database Layer
+👉 Amazon RDS → SQL database
+👉 Amazon DynamoDB → NoSQL, fast
+
+
+📦 6. Storage
+👉 Amazon S3: Files store karta hai (images, backups)
+
+
+🔐 7. Security
+👉 AWS IAM  → permissions
+👉 Amazon VPC  → private network
+
+
+📊 8. Monitoring
+👉 Amazon CloudWatch
+Logs, metrics, alerts
+
+
+
+🔄 3. Complete Real-Life Flow (Step-by-Step)
+
+User browser me website open karta hai
+Request jata hai → Route 53 (DNS)
+Fir → CloudFront (fast delivery)
+Fir → Load Balancer
+Fir → EC2 / Lambda (backend)
+Backend data fetch karta hai → RDS / DynamoDB
+Files fetch hoti hain → S3
+Monitoring hoti hai → CloudWatch
+
+
+🏗️ 4. Basic Architecture Diagram (Text)
+        User
+         ↓
+   Route 53 (DNS)
+         ↓
+   CloudFront (CDN)
+         ↓
+   Load Balancer
+         ↓
+   EC2 / Lambda
+      ↓      ↓
+    RDS   DynamoDB
+         ↓
+         S3
+		 
+
+High Availability → Multiple Availability Zones use karo
+Scalability → Auto Scaling + Load Balancer
+Fault Tolerance → Backup & failover
+Security → IAM + VPC
