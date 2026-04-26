@@ -1,0 +1,81 @@
+******************** AWS Account Type ***************************
+
+
+🔹 1. AWS Free Tier kya hai?
+
+AWS Free Tier =👉 AWS ka free usage plan for beginners
+
+✔️ Types of Free Tier
+6 months free (EC2, S3 etc.)
+Always free (kuch limited services)
+Trial based (short duration)
+✔️ Example:
+EC2 → 750 hours/month free
+S3 → limited storage free
+
+⚠️ Important:
+Limit cross kiya → charges start 💸
+Resources band nahi kiye → bill aayega
+
+
+
+
+🔹 2. Root User kya hota hai?
+
+👉 Jab tum AWS account create karte ho, jo email + password use karte ho, wohi Root User hota hai
+
+✔️ Root User ki power:
+
+Full access (sab kuch kar sakta hai)
+Billing control
+Account delete bhi kar sakta hai
+
+⚠️ Problem:
+👉 Ye bahut powerful hai → risky bhi
+
+Isliye best practice:
+Daily kaam ke liye use mat karo ❌
+Sirf important kaam ke liye use karo ✅
+
+
+
+🔹 3. IAM User kya hota hai?
+
+IAM = Identity and Access Management
+
+👉 IAM user = ek controlled user jo tum root user ke through banate ho
+
+✔️ Example:
+Developer user
+Admin user
+Read-only user
+
+✔️ Tum kya control kar sakte ho:
+Kaun kya access kare
+Kaun EC2 use kare
+Kaun sirf S3 dekh sake
+
+
+🔹 4. Real-world flow (important)
+Tum AWS account banate ho → Root user milta hai
+Root user se:IAM user create karo,usko permissions do, Aage ka sara kaam:👉 IAM user se karo (login karke)
+
+
+🔹 5. Best Practice:
+
+Root user:
+MFA enable karo 🔐
+rarely use karo
+
+IAM user:
+daily kaam ke liye use karo
+roles & policies assign karo
+
+🔹 Simple analogy
+
+Socho:
+Root User = Company ka owner 👑
+IAM User = Employees 👨‍💻
+
+Owner sab kuch kar sakta hai
+Employees ko limited access diya jata 
