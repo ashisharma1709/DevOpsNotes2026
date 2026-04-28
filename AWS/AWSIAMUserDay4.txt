@@ -1,0 +1,62 @@
+
+********************   IAM USER in AWS ******************************
+
+
+🔹 1. IAM User kya hota hai?
+
+IAM User = ek individual identity (user account) jo tum AWS ke andar banate ho.
+
+Har IAM user ka:
+username
+password (console login ke liye)
+access key (API/CLI ke liye) hota hai
+
+👉 Matlab:
+Root user = main owner account
+IAM user = team members / developers ke accounts
+
+
+👉 Best practice:
+
+Root user ko use mat karo daily
+IAM user bana ke usse kaam karo
+
+
+🔹 3. IAM User, Group aur Policy ka relation
+
+Yeh sabse important concept hai 👇
+
+
+🧩 (A) Policy kya hoti hai?
+
+JSON me likhi hui permissions
+Define karti hai: kya allowed hai / kya nahi
+
+👉 Example:
+EC2 start/stop allowed
+S3 full access
+
+
+👥 (B) Group kya hota hai?
+Multiple IAM users ka collection
+
+👉 Example:
+"Developers" group
+"Admins" group
+
+
+
+🔗 (C) Relation (Flow samjho)
+User → Group → Policy
+
+👉 Matlab:
+Tum user ko group me daalte ho
+Group ke paas policies hoti hain
+User ko automatically permissions mil jaati hain
+
+🔥 Real Example:
+Group: Developers
+Policy: EC2 Full Access
+
+➡️ Ab jo bhi user is group me add hoga:
+→ usko EC2 ka access mil jayega
