@@ -76,7 +76,7 @@ Avoid using root user for daily tasks
 
 - AWS Console: https://aws.amazon.com/console/  
 - Sign-in Page: https://signin.aws.amazon.com/  
-- IAM Login URL: https://<your-alias>.signin.aws.amazon.com/console  
+- IAM Login URL: https://<your-alias>.signin.aws.amazon.com/console  -> create alias from aws management console
 - AWS Management Console: https://console.aws.amazon.com/
 
 
