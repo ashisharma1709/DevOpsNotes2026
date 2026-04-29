@@ -1,0 +1,85 @@
+***********************   CREATE AWS FREE TIER ACCOUNT AND LOGIN AS ROOT USER *******************************8
+
+
+🚀 Create AWS Free Tier Account
+Steps
+
+🔹1 Navigate to AWS Free Tier page
+Go to: https://aws.amazon.com/free/
+
+🔹2️.Start signup
+Click on Create Free Account → you will be redirected to the signup page:
+https://signin.aws.amazon.com/signup?request_type=register
+
+🔹3. Enter email and account name
+Provide your Email ID and AWS account name (e.g., ashish29Apr2025), then click on Verify email address, enter the captcha, and submit.
+
+🔹4. Verify email
+Enter the verification code received on your email and click on Verify.
+
+🔹5. Set root user password 🔐
+Create a root user password and enter the same in confirm password.
+👉 Make sure to save or remember it securely.
+
+🔹6.Select plan
+Choose the Free 6-month plan.
+
+🔹7️.Enter contact information 📇
+Select Personal (for your own projects)
+Enter Full Name, Mobile Number, Address
+Tick the checkbox and click on Agree and Continue
+
+
+🔹8️. Enter billing information 💳
+Provide your Credit Card details:
+
+Card Number
+Expiry Date
+CVV
+Cardholder Name
+Then click on Continue
+
+
+🔹9️. OTP verification 📱
+Enter the OTP received on your registered mobile number (linked to the credit card) and submit.
+👉 INR 2.00 will be deducted for verification
+
+
+🔹10. Confirm your identity 🆔
+Select Personal Use
+Ownership type: Individual
+Document: PAN Card
+Enter DOB and PAN Number
+Upload PAN card document
+Click on Continue
+
+
+🔹11. Complete signup & activate account ✅
+AWS will process your details (this may take a few minutes).
+Once verification is successful, your account will be created.
+
+
+Login to AWS Console 🔑  https://signin.aws.amazon.com/ 
+
+Login using:
+Root user (Email ID)
+Password (same as used during signup process)
+
+
+🔥 Optional 
+
+🔐 12. Secure your account (Important)
+Enable MFA (Multi-Factor Authentication) for root user
+Create an IAM admin user
+Avoid using root user for daily tasks
+
+
+- AWS Console: https://aws.amazon.com/console/  
+- Sign-in Page: https://signin.aws.amazon.com/  
+- IAM Login URL: https://<your-alias>.signin.aws.amazon.com/console  
+- AWS Management Console: https://console.aws.amazon.com/
+
+
+
+
+
