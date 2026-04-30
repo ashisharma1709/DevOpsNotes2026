@@ -1,0 +1,85 @@
+********************** Create IAM USER AND LOGIN WITH IAM USER ******************
+
+
+🛠️ First IAM User kaise create karein
+
+
+🔹 Step 1: Root user se login karo
+
+AWS account open karo
+Email + password se login (ye root user hai)
+
+
+🔹 Step 2: IAM service open karo
+
+Top search bar me type karo: IAM
+IAM dashboard open ho jayega
+
+
+👥 Step 3: Group create karo (Admins)
+
+Left side → User groups click karo
+Create group pe click karo
+Group name likho: Admins
+Neeche policies me search karo:
+👉 AdministratorAccess
+Checkbox select karo
+Create group click karo
+
+👉 Ye group ab full access wala group ban gaya
+
+
+👤 Step 4: IAM User create karo
+
+Left side → Users click karo
+Create user pe click karo
+Username likho: admin-user
+
+
+🔐 Step 5: Access type select karo
+
+✅ Provide user access to AWS Management Console
+Password set karo:Auto-generated ya custom password
+
+
+👥 Step 6: Group assign karo
+
+Add user to group select karo
+Admins group select karo
+
+
+🔹 Step 7: Create user
+Next → Next → Create user
+
+
+🔑 Step 8: Login details save karo (IMPORTANT)
+AWS tumhe ek sign-in URL dega
+Username + password bhi dikhega
+👉 Isko copy/download kar lo (warna baad me problem hogi)
+
+🔁 Step 9: IAM user se login karo
+Browser me new tab kholo
+Sign-in URL open karo
+admin-user se login karo
+
+****************************Now Login with IAM users ********************
+
+🔹 IAM User login ka correct way
+
+✅ Option 1: Direct IAM URL (best)
+https://<account-id>.signin.aws.amazon.com/console
+
+✅ Option 2: Alias use karo (easy)
+Agar tumne account alias set kiya hai, to:
+https://<alias>.signin.aws.amazon.com/console
+
+👉 Ye hi best hai daily use ke liye
+
+✅ Option 3: AWS login page → IAM user select karo
+Kabhi-kabhi AWS page pe option aata hai:
+Root user
+IAM user
+
+👉 Agar IAM select kiya:
+Account ID / alias daalna padega
+Phir username + password
