@@ -1,0 +1,59 @@
+************************  Create First EC2 instance without key pair using IAM user **************************
+
+* What is EC2 ?
+
+EC2 = cloud ka computer
+Matlab AWS pe ek virtual machine milti hai
+Usme tum Ubuntu install karke use kar sakte ho jaise apna PC
+
+
+🚀 Step-by-step: 
+
+1. AWS Console open karo, and login as IAM user safte option
+👉 https://console.aws.amazon.com/
+Search: EC2 → open karo
+
+2. Launch Instance pe click karo
+
+3. Name do
+
+Kuch bhi simple naam: MyFirstServer
+
+4. OS select karo: Ubuntu Server 22.04 LTS
+
+5. Instance type: t2.micro (Free tier, paisa nahi lagega)
+
+6. Key Pair (IMPORTANT): Select: Proceed without key pair
+
+7. Network settings
+Edit pe click karo aur:
+✅ Public IP → Enable
+✅ SSH → allow (0.0.0.0/0)
+✅ HTTP → allow (future ke liye)
+
+
+8. Storage: Default rehne do (8GB)
+
+9. Launch Instance
+Click karo → Launch
+ 1–2 min wait karo
+
+🔑 Connect kaise kare (without key pair)
+EC2 dashboard → Instances
+Apna instance select karo
+Click Connect
+
+Select:
+👉 EC2 Instance Connect
+Click Connect
+Terminal open ho jayega
+
+Result: abhi ek live server bana liya, Internet pe available hai
+Isme:
+website host kar sakte ho
+backend bana sakte ho
+APIs run kar sakte ho
+
+
+
+
