@@ -1,0 +1,75 @@
+********************** What is NGINX?  *******************************
+
+Nginx kya hai?
+Nginx ek ek web server software hai hai jo internet se aane wali requests ko handle karta hai aur browser ko response deta hai
+“Engine-X” = “Engine” → powerful system, “X” → scalable / unknown large scale
+
+👉 Nginx = web server (jo website ko browser tak pahunchata hai)
+ Nginx = software (web server)
+ Running Nginx = service
+
+
+Flow:
+
+Jab tum browser me likhte ho: http://your-ip
+
+Toh:Browser → request bhejta hai → Nginx → file/app → response → browser
+
+
+Nginx ka kaam kya hai?
+
+1️. Website dikhana: HTML, CSS, JS serve karta hai
+
+2️. Requests handle karna: Kaun kya access karega decide karta hai
+
+3️. Backend ke paas request bhejna: Java / Node app ko forward karta hai
+
+Real life example
+Internet = road
+Tumhara EC2 = ghar
+Nginx = gatekeeper / guard 🚪
+
+👉 Koi aaya:
+Guard poochta hai → kya chahiye?
+Fir andar bhejta hai ya response deta hai
+❌ Nginx nahi ho to
+
+👉 Request aayegi → koi handle nahi karega
+👉 Result = connection refused
+
+✅ Nginx ho to
+
+👉 Request aayegi → Nginx pakdega
+👉 Page ya response bhej dega
+
+Nginx = software jo port 80/443 pe baith ke requests sunta hai aur response deta hai
+
+
+
+* DevOps usecase:
+
+1. Web Server
+
+2. Reverse Proxy : Nginx frontend pe hota hai, Backend apps ko hide karta hai
+Example:
+User → Nginx → Spring Boot app
+User ko backend ka direct access nahi milta
+
+3. Load Balancer->  Agar 2–3 backend servers hai:User → Nginx → Server1 / Server2 / Server3,  Traffic distribute karta hai
+
+4. SSL / HTTPS handle karna: HTTP → HTTPS convert karta hai, Security handle karta hai
+
+5. High performance: Bahut fast hai, Millions requests handle kar sakta hai
+
+Real-world architecture
+User
+ ↓
+Nginx (entry point)
+ ↓
+Backend (Java / Node)
+ ↓
+Database
+
+👉 DevOps me:
+Nginx = entry point of system
+Sab request pehle yahi aati hai
