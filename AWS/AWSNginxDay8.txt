@@ -148,3 +148,234 @@ Important tips
 ps -ef | grep java
 🔸 Nginx running check
 sudo systemctl status nginx
+
+
+******************************* LoadBalancer *****************************
+LoadBalancer: Traffic ko multiple servers me divide karna
+
+ Exampl Maan le tere paas 3 backend servers hai:
+
+Server1
+Server2
+Server3
+
+Without load balancer:
+Sab traffic → Server1 → crash 
+
+With load balancer (Nginx)
+User → Nginx
+        ↓
+   ┌───────────┐
+   ↓     ↓     ↓
+Server1 Server2 Server3
+
+
+ Nginx decide karta hai:
+
+1st request → server1
+2nd → server2
+3rd → server3
+
+ Load distribute ho gaya 
+
+Important Same Nginx dono kaam karta hai:
+✔ Reverse Proxy
+✔ Load Balancer
+
+
+User
+ ↓
+Nginx
+ ↓
+Multiple backend servers
+ ↓
+Database
+
+👉 Reverse Proxy = “main request handle karunga”
+👉 Load Balancer = “main decide karunga kis server ko dena hai”
+
+
+********************** SSL ***********************************
+
+SSL kya hota hai? Secure Socket Layer
+
+👉 SSL = Secure connection
+
+HTTP → normal (unsafe)
+HTTPS → secure (encrypted)
+
+Example:
+http://  ❌
+https:// ✅
+
+
+Nginx ka kaam: Client aur server ke beech secure tunnel banana
+
+User (browser)
+   ↓ (HTTPS request)
+Nginx (SSL handle karta hai 🔐)
+   ↓
+Backend (normal HTTP)
+
+👉 Important:
+
+User ↔ Nginx = secure (HTTPS)
+Nginx ↔ Backend = normal (HTTP)
+
+Isko bolte hain: SSL Termination
+
+👉 SSL ka load backend pe nahi dalte
+👉 Nginx pe hi encryption/decryption hota hai
+
+Real-life analogy
+User = customer
+Nginx = security gate
+Backend = office
+
+👉 Gate pe checking hoti hai, Andar normal baat hoti hai
+
+
+Practically kya chahiye?
+
+1️. Domain name: Example: myapp.com
+
+2️. SSL Certificate: Mostly free use hota hai,Let's Encrypt
+
+3️. Nginx config
+
+Example:
+server {
+    listen 443 ssl;
+    server_name myapp.com;
+
+    ssl_certificate /path/to/cert.pem;
+    ssl_certificate_key /path/to/key.pem;
+
+    location / {
+        proxy_pass http://localhost:8080;
+    }
+}
+🔁 HTTP → HTTPS redirect
+server {
+    listen 80;
+    server_name myapp.com;
+
+    return 301 https://$host$request_uri;
+}
+
+Jo HTTP pe aaye → automatically HTTPS pe bhej do
+
+Data secure (password, payment)
+Browser “Not Secure” warning hataata hai
+SEO me bhi help karta hai
+
+
+👉 Nginx SSL handle karta hai taaki user aur server ke beech secure connection ho
+
+
+
+🔹 Step 1: Browser request bhejta hai (port 443)
+Browser samajh gaya: “HTTPS hai → secure connection chahiye”
+👉 Isliye request bhejta hai:IP address + port 443
+
+
+🔹 Step 2: Request EC2 machine pe pahunchti hai
+👉 Internet ke through request aati hai
+👉 Tere EC2 server tak pahunchti hai
+
+🔹 Step 3: Nginx port 443 pe ready baitha hai
+Nginx bolta hai:“Jo bhi 443 pe aayega, main handle karunga”
+
+🔹 Step 4: SSL certificate use hota hai:
+Nginx ke paas ek SSL certificate hota hai, Ye certificate kya karta hai?
+Browser ko batata hai: “main trusted hoon”
+Encryption ke liye keys provide karta hai
+
+
+🔹 Step 5: SSL Handshake : Browser aur Nginx ke beech ek “secret deal” hoti hai
+
+Browser: “secure baat karni hai”
+Nginx: “ye meri certificate hai”
+Dono agree karte hain ek secret key pe
+ Ab connection secure ho gaya
+ 
+
+🔹 Step 6: Encrypted request aati hai: Browser jo data bhejta hai:wo encrypted (coded) hota hai
+
+Example:username=ashish → convert ho jata hai → #@!$%^&*
+
+
+🔹 Step 7: Nginx decrypt karta hai
+Nginx us encrypted data ko decode (decrypt) karta hai
+Ab uske paas normal request aa gayi:
+GET /api/user
+
+
+🔹 Step 8: Backend ko forward (HTTP me)
+ Nginx bolta hai:“Backend bhai, ye request handle kar”
+
+👉 Forward karta hai:http://localhost:8080
+
+👉 Yaha HTTP (non-secure) use hota hai
+
+🔹 Step 9: Backend ka kaam: Backend (Spring Boot / Node etc.):
+
+Request process karta hai
+Data fetch karta hai
+Response banata hai
+
+Example:{ "name": "Ashish" }
+
+
+🔹 Step 10: Response wapas Nginx ko: Backend → Nginx ko response deta hai (normal HTTP)
+
+🔹 Step 11: Nginx encrypt karta hai: Nginx fir se us response ko encrypt karta hai 🔐
+
+🔹 Step 12: Browser ko bhejta hai
+👉 Browser ko encrypted data milta hai
+👉 Browser usko decrypt karta hai
+👉 Page dikha deta hai 😎
+
+
+Browser
+  ↓ HTTPS 🔐
+Nginx (SSL handle karta hai)
+  ↓ HTTP
+Backend
+  ↑ HTTP
+Nginx (encrypt 🔐)
+  ↑ HTTPS
+Browser
+
+
+Browser HTTPS request bhejta hai (port 443)
+👉 User enters: https://yourdomain.com
+
+Request EC2 server tak pahunchti hai
+👉 Internet ke through tumhare server pe aati hai
+
+Nginx port 443 pe request receive karta hai
+👉 Nginx configured hota hai: listen 443 ssl;
+
+Nginx ke paas SSL certificate hota hai 🔐
+👉 Certificate + private key ready hoti hai
+
+SSL Handshake hota hai (secure connection establish)
+👉 Browser + Nginx decide:
+encryption method
+secret key
+
+Browser encrypted request bhejta hai
+👉 Data secure (coded form) me hota hai
+
+Nginx request ko decrypt karta hai
+👉 Encrypted → normal readable request
+
+Nginx backend ko request forward karta hai (HTTP me)
+👉 Example: http://localhost:8080
+
+Backend request process karke response deta hai
+Nginx response ko encrypt karta hai 🔐
+s
+Encrypted response browser ko bhejta hai
+👉 Browser decrypt karke final output dikhata hai
