@@ -73,3 +73,78 @@ Database
 👉 DevOps me:
 Nginx = entry point of system
 Sab request pehle yahi aati hai
+
+
+********************************  Reverse Proxy?  ********************************************
+
+Jab user directly backend se baat nahi karta,  Beech me Nginx hota hai
+Nginx request ko receive karta hai aur backend app ko forward karta hai
+
+Without Reverse Proxy (direct access)
+User → Backend (Spring Boot :8080)
+
+❌ Problems:
+Port expose hota hai (8080), Security kam, Load handle nahi hota
+
+With Reverse Proxy (Nginx)
+User → Nginx (port 80) → Backend (port 8080)
+
+User ko sirf Nginx dikhega, Backend hidden rahega
+
+Practical setup:
+
+Step 1: Backend app run karo. Example (Spring Boot): 
+java -jar app.jar
+Ye chalega:http://localhost:8080
+
+Step 2: Nginx install (agar nahi hai): sudo apt install nginx -y
+
+Step 3: Nginx config edit karo: sudo nano /etc/nginx/sites-available/default
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://localhost:8080;
+    }
+}
+
+Step 4: Nginx restart: sudo systemctl restart nginx
+
+Tum browser me sirf: http://<your-public-ip> hit karo
+
+Flow kya hoga internally
+
+User (browser)
+   ↓
+Nginx (port 80)
+   ↓
+Forward to localhost:8080
+   ↓
+Spring Boot app
+   ↓
+Response back via Nginx
+   ↓
+Browser pe output
+
+
+Result: Tu port 8080 hide kar diya, Ab sab traffic Nginx se aa raha hai
+
+Real-life analogy:
+Nginx = receptionist 
+Backend = employee 
+
+👉 User aaya: Receptionist poochti hai, Fir correct employee ko bhejti hai
+
+
+Security (backend hidden)
+Load balancing
+SSL handling
+Traffic control
+
+Important tips
+
+🔸 Backend chal raha hona chahiye
+ps -ef | grep java
+🔸 Nginx running check
+sudo systemctl status nginx
