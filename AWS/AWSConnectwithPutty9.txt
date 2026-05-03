@@ -47,3 +47,25 @@ Quick Summary
 MobaXterm → direct .pem use karo ✔
 PuTTY → .ppk convert karke use karo ✔
 IP + username + key = login 🔑
+
+
+
+
+*********************************  .pem vs .ppk *************************************************
+
+.pem file: Privacy Enhanced Mail (format name)
+Ye ek standard private key format hai
+Mostly use hoti hai:Linux,Mac,Cloud tools (AWS EC2)
+
+👉 Example use:
+ssh -i mykey.pem ubuntu@IP
+
+
+.ppk file: PuTTY Private Key
+Ye format sirf PuTTY ke liye bana hai
+PuTTY .pem ko directly samajh nahi pata ❌, Isliye convert karna padta hai
+
+
+Conversion kaise hota hai?
+Tool:PuTTYgen
+Flow:.pem → (PuTTYgen) → .ppk
