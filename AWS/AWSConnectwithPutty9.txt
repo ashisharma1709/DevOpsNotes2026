@@ -1,0 +1,49 @@
+***************************  Connect Linux Machine with Key Pair through putty or mobaxterm ***********************
+
+👉 Method 1: MobaXterm
+
+Steps:
+
+MobaXterm open karo
+Session → SSH pe click karo
+Fill karo:
+Remote host → EC2 ka Public IP
+Username →ubuntu (Ubuntu server)/ec2-user (Amazon Linux)
+“Advanced SSH settings” open karo
+Tick: Use private key
+Apni .pem file select karo
+
+Click OK / Connect
+Done — terminal open ho jayega
+
+
+
+
+👉 Method 2: PuTTY (with .ppk conversion)
+
+Tools:PuTTY, PuTTYgen
+
+Step 1: .pem → .ppk
+PuTTYgen open karo
+Click Load → .pem file select karo
+Click Save private key
+Save as .ppk
+
+Step 2: Connect via PuTTY
+PuTTY open karo
+
+Host Name:ubuntu@<Public-IP> (ya ec2-user@IP)
+
+Left side:
+Connection → SSH → Auth
+Browse → .ppk file select karo
+Back to Session → Click Open
+
+First time:“Trust this host?” → Yes
+
+✔ Login ho jayega
+
+Quick Summary
+MobaXterm → direct .pem use karo ✔
+PuTTY → .ppk convert karke use karo ✔
+IP + username + key = login 🔑
