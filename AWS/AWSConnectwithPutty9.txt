@@ -69,3 +69,66 @@ PuTTY .pem ko directly samajh nahi pata ❌, Isliye convert karna padta hai
 Conversion kaise hota hai?
 Tool:PuTTYgen
 Flow:.pem → (PuTTYgen) → .ppk
+
+
+
+
+*******************************  SSH KEY PAIR ****************************************
+
+Why SSH Key Pair Exists? Earlier login methods:Username + password  (weak, brute-force possible)
+
+Cloud servers like AWS EC2:Exposed to internet, Need strong authentication.So instead of passwords → we use SSH Key Pairs.
+
+What is an SSH Key Pair?
+
+It’s a combination of:Public Key (goes to server / EC2) and Private Key (stays with you, secret)
+
+Think like:
+Public key = lock 🔒
+Private key = key 🗝️
+
+
+When you launch an EC2 instance:
+AWS asks → select/create key pair
+AWS does:
+Public key → stores in EC2 (~/.ssh/authorized_keys)
+Private key → gives you .pem file
+
+When You Connect via SSH: ssh -i mykey.pem ubuntu@<public-ip>
+
+Behind the scenes:
+Your system says:“I want to connect”
+Server says:“Prove it”
+Server checks:Do you have the matching private key?
+Your SSH client:Uses private key to sign a message
+Server verifies using public key
+
+✔ If match → Login success
+❌ If not → Access denied
+
+
+Private key never leaves your system
+Server only has public key
+Even AWS cannot see your private key again
+
+
+Why This is Secure?
+No password sent over network, Uses cryptography (RSA / ED25519), Practically impossible to guess
+
+
+“Server ke paas lock (public key) hota hai, aur tumhare paas uska key (private key) — dono match hue to hi entry milegi.”
+
+
+
+Case 1: Tum apne laptop se connect kar rahe ho: Use Public IP
+ssh -i key.pem ubuntu@Public-IP
+Kyun?
+Tum internet se connect kar rahe ho, Server internet pe public IP se hi accessible hai
+
+Case 2: Ek EC2 se dusre EC2 me ja rahe ho: Use Private IP
+ssh -i key.pem ubuntu@Private-IP
+Kyun?
+Same VPC (internal network)
+Fast + secure (internet nahi lagta)
+
+
